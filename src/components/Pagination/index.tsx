@@ -1,13 +1,11 @@
-"use client";
+'use client';
 
-import React from 'react'
-import { Pagination as PaginationNextUI } from "@nextui-org/react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 
-interface PaginationProps {
-    totalPages: number
-}
+import { Pagination as PaginationNextUI } from '@nextui-org/react';
+
 export default function Pagination() {
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -24,10 +22,13 @@ export default function Pagination() {
     replace(`${pathname}?${params.toString()}`);
   };
 
-
   return (
     <div className="flex justify-center">
-      <PaginationNextUI total={10} initialPage={1} onChange={(page: number) => changePage(page.toString())}/>
+      <PaginationNextUI
+        total={10}
+        initialPage={1}
+        onChange={(page: number) => changePage(page.toString())}
+      />
     </div>
-  )
+  );
 }
