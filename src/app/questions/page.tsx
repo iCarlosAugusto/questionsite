@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
 import React from 'react';
 
-import { AlternativeLabel } from '@/components/Alternative';
-import { AlternativeWrapper } from '@/components/Alternative/AlternativeWrapper';
 import Filter from '@/components/Filter';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Pagination from '@/components/Pagination';
@@ -91,15 +89,6 @@ const Questions = () => {
       {questions.map((currentQuestion, index) => (
         <QuestionWrapper {...currentQuestion} key={index}>
           <QuestionLabel label={currentQuestion.text} key={index} />
-          {currentQuestion.alternatives.map((currentAlternative, index) => (
-            <AlternativeWrapper
-              {...currentAlternative}
-              alternativeLetter="A"
-              key={index}
-            >
-              <AlternativeLabel label={currentAlternative.textAlternative} />
-            </AlternativeWrapper>
-          ))}
         </QuestionWrapper>
       ))}
       <Pagination />
