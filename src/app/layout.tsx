@@ -1,11 +1,12 @@
-"use client";
-import "jsvectormap/dist/jsvectormap.css";
-import "flatpickr/dist/flatpickr.min.css";
-import "@/css/satoshi.css";
-import "@/css/style.css";
-import React, { useEffect, useState } from "react";
-import Loader from "@/components/common/Loader";
-import { NextUIProvider } from "@nextui-org/react";
+'use client';
+import 'jsvectormap/dist/jsvectormap.css';
+import 'flatpickr/dist/flatpickr.min.css';
+import '@/css/satoshi.css';
+import '@/css/style.css';
+import React, { useEffect, useState } from 'react';
+
+import Loader from '@/components/common/Loader';
+import { NextUIProvider } from '@nextui-org/react';
 
 export default function RootLayout({
   children,
@@ -25,9 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          <NextUIProvider>
-            {loading ? <Loader /> : children}
-          </NextUIProvider>
+          <NextUIProvider>{loading ? <Loader /> : children}</NextUIProvider>
         </div>
       </body>
     </html>
