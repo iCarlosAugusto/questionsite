@@ -1,16 +1,28 @@
-import React from 'react'
-import { Button as NextUIButton } from '@nextui-org/react'
+import React from 'react';
 
 interface ButtonProps {
-    label: string;
-    onClick?: () => void;
-    className?: string;
+  label: string;
+  onClick?: () => void;
+  disable?: boolean;
+  className?: string;
 }
 
-export default function ButtonComponent({ label, className, onClick }: ButtonProps) {
+export default function ButtonComponent({
+  label,
+  className,
+  disable = false,
+  onClick,
+}: ButtonProps) {
   return (
-    <NextUIButton onClick={onClick} className={`w-full md:w-min ${className}`}>
-      { label }
-    </NextUIButton>
-  )
+    <>
+      <div
+        className={`mb-7.5 flex flex-wrap gap-5 xl:gap-20 ${className} ${disable ? 'opacity-50' : 'opacity-100'}`}
+        onClick={() => !disable ?? onClick}
+      >
+        <button className="inline-flex items-center justify-center rounded-md bg-meta-3 px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+          {label}
+        </button>
+      </div>
+    </>
+  );
 }
