@@ -1,17 +1,13 @@
-"use client";
-import dynamic from "next/dynamic";
-import React from "react";
-import ChartOne from "../Charts/ChartOne";
-import ChartTwo from "../Charts/ChartTwo";
-import ChatCard from "../Chat/ChatCard";
-import TableOne from "../Tables/TableOne";
-import CardDataStats from "../CardDataStats";
+'use client';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import React from 'react';
 
-const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
-  ssr: false,
-});
+import ButtonComponent from '../Button';
+import CardDataStats from '../CardDataStats';
+import ChartOne from '../Charts/ChartOne';
 
-const ChartThree = dynamic(() => import("@/components/Charts/ChartThree"), {
+const ChartThree = dynamic(() => import('@/components/Charts/ChartThree'), {
   ssr: false,
 });
 
@@ -19,7 +15,12 @@ const ECommerce: React.FC = () => {
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp>
+        <CardDataStats
+          title="Total de questões respondias"
+          total="100"
+          rate="0.4 3%"
+          levelUp
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -104,8 +105,86 @@ const ECommerce: React.FC = () => {
           </svg>
         </CardDataStats>
       </div>
+      <div className="w-full flex flex-col rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark mt-5">
+        <div>
+          <span className="text-3xl">Boas vindas! Vamos estudar?</span>
+          <div className="flex justify-between">
+            <span>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+              porro doloribus laboriosam minus nam quisquam labore numquam
+              voluptas ratione sed, praesentium minima quae ut voluptatum quos
+              obcaecati aperiam fugit facilis!
+            </span>
+          </div>
+        </div>
 
-      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+        <div className="flex space-x-5 mt-5">
+          <ButtonComponent label="Continuar de onde parei" />
+          <ButtonComponent label="Explorar todas as questões disponíveis" />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-center justify-center mt-15">
+        <span className="text-4xl">Explore os mais 15 cursos disponveis</span>
+
+        <div className="flex justify-evenly w-full mt-5">
+          {[
+            {
+              name: 'Cloud',
+              image: 'https://media.whizlabs.com/website/g1.webp',
+            },
+            {
+              name: 'CI/CD',
+              image: 'https://media.whizlabs.com/website/g2.webp',
+            },
+            {
+              name: 'Segurança',
+              image: 'https://media.whizlabs.com/website/g3.webp',
+            },
+            {
+              name: 'Microsoft',
+              image: 'https://media.whizlabs.com/website/g4.webp',
+            },
+            {
+              name: 'Java',
+              image: 'https://media.whizlabs.com/website/g5.webp',
+            },
+            {
+              name: 'Cloud',
+              image: 'https://media.whizlabs.com/website/g6.webp',
+            },
+            {
+              name: 'Cloud',
+              image: 'https://media.whizlabs.com/website/g1.webp',
+            },
+          ].map((el, index) => (
+            <Link href={`/library/${el.name}`} key={index}>
+              <div className="flex flex-col items-center cursor-pointer">
+                <div className="w-25 h-25 rounded-full bg-gray-200 flex items-center justify-center bg-slate-100 cursor-pointer">
+                  <img src={el.image} alt="Imagem no centro" />
+                </div>
+                <span>{el.name}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+          <ChartOne />
+          {/* <ChartTwo /> */}
+          <ChartThree />
+          {/* <div className="col-span-12 xl:col-span-8">
+            <TableOne />
+          </div> */}
+        </div>
+
+        {/* <img src="https://media.whizlabs.com/website/g2.webp" alt="" />
+          <img src="https://media.whizlabs.com/website/g3.webp" alt="" />
+          <img src="https://media.whizlabs.com/website/g4.webp" alt="" />
+          <img src="https://media.whizlabs.com/website/g5.webp" alt="" />
+          <img src="https://media.whizlabs.com/website/g6.webp" alt="" /> */}
+      </div>
+
+      {/* <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
         <ChartOne />
         <ChartTwo />
         <ChartThree />
@@ -114,7 +193,7 @@ const ECommerce: React.FC = () => {
           <TableOne />
         </div>
         <ChatCard />
-      </div>
+      </div> */}
     </>
   );
 };
