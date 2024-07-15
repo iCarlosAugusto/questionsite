@@ -1,21 +1,35 @@
-'use client';
-
 import Link from 'next/link';
 import React from 'react';
 
 import ButtonComponent from '@/components/Button';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 
-export default function Library() {
+const getCourses = async () => {
+  'use server';
+
+  return 'E';
+};
+
+export default async function Library({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const value = await getCourses();
+  console.log(params.slug);
   return (
     <div>
       <DefaultLayout showSidebar={true}>
         <div>
           <span className="text-4xl">Questões de certificações</span>
+          {value}
 
           {Array.from({ length: 5 }).map((_, i) => (
             <>
-              <div className="w-full flex flex-col rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark mt-5">
+              <div
+                className="w-full flex flex-col rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark mt-5"
+                key={i}
+              >
                 <div>
                   <p className="text-2xl font-bold">AWS Cloud Patriconer</p>
                   <p className="mb-5">
