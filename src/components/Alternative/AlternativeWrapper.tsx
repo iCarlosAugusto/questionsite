@@ -19,7 +19,7 @@ export function AlternativeWrapper({
 
   return (
     <div
-      className="flex flex-row items-center mt-5 cursor-pointer"
+      className="flex flex-row items-center mt-5 cursor-pointer p-5 hover:bg-slate-800 opacity-90 rounded-3xl"
       onClick={pickAlternative}
     >
       <div

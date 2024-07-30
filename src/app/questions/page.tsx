@@ -19,7 +19,6 @@ const Questions = () => {
     {
       id: '1',
       text: 'Quanto é 1+1',
-
       alternatives: [
         {
           id: '2',
@@ -50,7 +49,6 @@ const Questions = () => {
     {
       id: '2',
       text: 'Quanto é 2+2',
-
       alternatives: [
         {
           id: '1',

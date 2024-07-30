@@ -19,10 +19,12 @@ export function QuestionWrapper({
   alternatives,
   children,
 }: QuestionWrapperProps) {
-  const [alternativeSelected, setAlternativeSelected] =
-    useState<AlternativeEntity | null>(null);
-  const showAnswer = () => {
-    console.log('SHOW ANSER');
+  // eslint-disable-next-line prettier/prettier
+  const [alternativeSelected, setAlternativeSelected] = useState<AlternativeEntity | null>(null);
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  const handleShowAnswer = () => {
+    setShowAnswer(true);
   };
 
   const pickAlternative = (alternative: AlternativeEntity) => {
@@ -45,12 +47,14 @@ export function QuestionWrapper({
         </div>
       ))}
 
-      <ButtonComponent
-        label="Confirmar"
-        className="mt-5"
-        disable={!alternativeSelected}
-        onClick={showAnswer}
-      />
+      <div className="flex items-center mt-5">
+        <ButtonComponent
+          label="Confirmar"
+          disable={!alternativeSelected}
+          onClick={handleShowAnswer}
+        />
+        {showAnswer && <span className="ml-5">Você respondeu</span>}
+      </div>
     </div>
   );
 }
