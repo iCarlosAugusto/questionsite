@@ -6,8 +6,6 @@ import React from 'react';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 
-import GoogleLogin from './googleLogin';
-
 export const metadata: Metadata = {
   title: 'Next.js SignUp Page | TailAdmin - Next.js Dashboard Template',
   description: 'This is Next.js SignUp Page TailAdmin Dashboard Template',
@@ -321,7 +319,7 @@ const SignUp = () => {
                   />
                 </div>
               </form>
-              <GoogleLogin />
+              {/* <GoogleLogin /> */}
 
               <div className="mt-6 text-center">
                 <p>
