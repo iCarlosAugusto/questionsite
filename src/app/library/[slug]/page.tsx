@@ -11,13 +11,14 @@ export default async function Library({
   params: { slug: string };
 }) {
   const value = await getCourses();
-  console.log(params.slug);
+
   return (
     <div>
       <DefaultLayout showSidebar={true}>
         <div>
-          <span className="text-4xl">Questões de certificações</span>
-          {value}
+          <span className="text-4xl">
+            Questões de certificações {params.slug}
+          </span>
 
           <CourseList initialCourses={[1, 2, 3]} />
         </div>
