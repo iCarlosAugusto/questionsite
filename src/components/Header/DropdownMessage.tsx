@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import ClickOutside from "@/components/ClickOutside";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+
+import ClickOutside from '@/components/ClickOutside';
 
 const DropdownMessage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [notifying, setNotifying] = useState(true);
-
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
@@ -21,7 +21,7 @@ const DropdownMessage = () => {
         >
           <span
             className={`absolute -right-0.5 -top-0.5 z-1 h-2 w-2 rounded-full bg-meta-1 ${
-              notifying === false ? "hidden" : "inline"
+              notifying === false ? 'hidden' : 'inline'
             }`}
           >
             <span className="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75"></span>
@@ -73,11 +73,11 @@ const DropdownMessage = () => {
                     <Image
                       width={112}
                       height={112}
-                      src={"/images/user/user-02.png"}
+                      src={'/images/user/user-02.png'}
                       alt="User"
                       style={{
-                        width: "auto",
-                        height: "auto",
+                        width: 'auto',
+                        height: 'auto',
                       }}
                     />
                   </div>
@@ -100,11 +100,11 @@ const DropdownMessage = () => {
                     <Image
                       width={112}
                       height={112}
-                      src={"/images/user/user-01.png"}
+                      src={'/images/user/user-01.png'}
                       alt="User"
                       style={{
-                        width: "auto",
-                        height: "auto",
+                        width: 'auto',
+                        height: 'auto',
                       }}
                     />
                   </div>
@@ -127,11 +127,11 @@ const DropdownMessage = () => {
                     <Image
                       width={112}
                       height={112}
-                      src={"/images/user/user-03.png"}
+                      src={'/images/user/user-03.png'}
                       alt="User"
                       style={{
-                        width: "auto",
-                        height: "auto",
+                        width: 'auto',
+                        height: 'auto',
                       }}
                     />
                   </div>
@@ -154,11 +154,11 @@ const DropdownMessage = () => {
                     <Image
                       width={112}
                       height={112}
-                      src={"/images/user/user-04.png"}
+                      src={'/images/user/user-04.png'}
                       alt="User"
                       style={{
-                        width: "auto",
-                        height: "auto",
+                        width: 'auto',
+                        height: 'auto',
                       }}
                     />
                   </div>
@@ -181,11 +181,11 @@ const DropdownMessage = () => {
                     <Image
                       width={112}
                       height={112}
-                      src={"/images/user/user-02.png"}
+                      src={'/images/user/user-02.png'}
                       alt="User"
                       style={{
-                        width: "auto",
-                        height: "auto",
+                        width: 'auto',
+                        height: 'auto',
                       }}
                     />
                   </div>
