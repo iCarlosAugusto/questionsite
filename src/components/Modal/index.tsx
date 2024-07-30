@@ -33,7 +33,7 @@ const Modal = ({ isOpen, closeModal }: ModalProps) => {
 
   return (
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-999999"
+      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-999999 p-4"
       variants={backdropVariants}
       initial="hidden"
       animate="visible"
