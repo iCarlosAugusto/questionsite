@@ -134,10 +134,6 @@ const ECommerce: React.FC = () => {
               image: 'https://media.whizlabs.com/website/g1.webp',
             },
             {
-              name: 'CI/CD',
-              image: 'https://media.whizlabs.com/website/g2.webp',
-            },
-            {
               name: 'Segurança',
               image: 'https://media.whizlabs.com/website/g3.webp',
             },
