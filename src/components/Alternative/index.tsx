@@ -5,6 +5,5 @@ interface AlternativeLabelProps {
 }
 
 export function AlternativeLabel({ label }: AlternativeLabelProps) {
-  console.log('Alternative Label');
   return <p>{label}</p>;
 }
