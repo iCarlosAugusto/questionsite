@@ -54,7 +54,7 @@ export default function Filter() {
             onClick={() => changePage('wrong')}
           />
         </div>
-        <div className="mt-5 space-x-5">
+        <div className="mt-5 space-x-5 flex">
           <ButtonComponent label="Filtrar" />
           <ButtonComponent label="Limpar" />
         </div>
