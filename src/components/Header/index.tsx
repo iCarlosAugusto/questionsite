@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import DarkModeSwitcher from './DarkModeSwitcher';
-import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
 
 const Header = (props: {
@@ -72,7 +71,7 @@ const Header = (props: {
             {/* <!-- Dark Mode Toggler --> */}
 
             {/* <!-- Notification Menu Area --> */}
-            <DropdownNotification />
+            {/* <DropdownNotification /> */}
             {/* <!-- Notification Menu Area --> */}
           </ul>
 
