@@ -3,9 +3,9 @@ import ReactApexChart from 'react-apexcharts';
 
 import { ApexOptions } from 'apexcharts';
 
-interface ChartThreeState {
-  series: number[];
-}
+// interface ChartThreeState {
+//   series: number[];
+// }
 
 const options: ApexOptions = {
   chart: {

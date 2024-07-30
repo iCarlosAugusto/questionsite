@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import ClickOutside from '@/components/ClickOutside';
@@ -324,7 +323,6 @@ const menuGroups = [
 ];
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
-  const pathname = usePathname();
   const [pageName, setPageName] = useLocalStorage('selectedMenu', 'dashboard');
 
   return (
