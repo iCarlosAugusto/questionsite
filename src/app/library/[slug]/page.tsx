@@ -16,9 +16,7 @@ export default async function Library({
     <div>
       <DefaultLayout showSidebar={true}>
         <div>
-          <span className="text-4xl">
-            Questões de certificações {params.slug}
-          </span>
+          <h1 className="text-4xl">Questões de certificações {params.slug}</h1>
 
           <CourseList initialCourses={[1, 2, 3]} />
         </div>
