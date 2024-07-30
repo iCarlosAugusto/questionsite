@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const Profile = () => {
   return (
-    <DefaultLayout>
+    <DefaultLayout showSidebar={false}>
       <div className="mx-auto max-w-242.5">
         <Breadcrumb pageName="Profile" />
 

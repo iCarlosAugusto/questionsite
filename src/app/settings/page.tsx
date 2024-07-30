@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const Settings = () => {
   return (
-    <DefaultLayout>
+    <DefaultLayout showSidebar={false}>
       <div className="mx-auto max-w-270">
         <Breadcrumb pageName="Settings" />
 
