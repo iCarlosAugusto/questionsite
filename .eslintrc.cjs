@@ -2,9 +2,9 @@ module.exports = {
   root: true,
   env: { browser: true, es2021: true },
   settings: {
-    'react': {
-      'version': 'detect'
-    }
+    react: {
+      version: 'detect',
+    },
   },
   extends: [
     'eslint:recommended',
@@ -13,14 +13,20 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
-    'prettier'
+    'prettier',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', '@typescript-eslint', 'react', 'prettier', 'eslint-plugin-import-helpers'],
+  plugins: [
+    'react-refresh',
+    '@typescript-eslint',
+    'react',
+    'prettier',
+    'eslint-plugin-import-helpers',
+  ],
   parserOptions: {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module' 
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   rules: {
     'react-refresh/only-export-components': [
@@ -29,18 +35,19 @@ module.exports = {
     ],
     'prettier/prettier': 'error',
     'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'import-helpers/order-imports': [
       'warn',
       {
-        'newlinesBetween': 'always', // new line between groups
-        'groups': [
+        newlinesBetween: 'always', // new line between groups
+        groups: [
           ['/^react/', '/^next/', '/@react/'],
           'module',
           '/^components/',
-          ['parent', 'sibling', 'index']
+          ['parent', 'sibling', 'index'],
         ],
-        'alphabetize': { 'order': 'asc', 'ignoreCase': true }
-      }
-    ]
+        alphabetize: { order: 'asc', ignoreCase: true },
+      },
+    ],
   },
-}
+};
