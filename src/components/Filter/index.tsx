@@ -4,6 +4,9 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
+import useModal from '@/hooks/useModal';
+
+import { DragCloseDrawer } from '../Bottomsheet';
 import ButtonComponent from '../Button';
 import ChipComponent from '../Chip';
 
@@ -23,8 +26,51 @@ export default function Filter() {
 
     replace(`${pathname}?${params.toString()}`);
   };
+  const { closeModal, isOpen, openModal } = useModal();
   return (
-    <div>
+    <>
+      <DragCloseDrawer open={isOpen} setOpen={closeModal}>
+        <div className="mx-auto max-w-2xl space-y-4 text-neutral-400">
+          <h2 className="text-4xl font-bold text-neutral-200">
+            Drag the handle at the top of this modal downwards 100px to close it
+          </h2>
+          <div className="mt-2">
+            <div>
+              <ChipComponent
+                label="Todas"
+                isSeleced={currentQuestionType === 'all'}
+                onClick={() => changePage('all')}
+              />
+              <ChipComponent
+                label="Resolvidas"
+                isSeleced={currentQuestionType === 'resolved'}
+                onClick={() => changePage('resolved')}
+              />
+              <ChipComponent
+                label="Não resolvidas"
+                isSeleced={currentQuestionType === 'notResolved'}
+                onClick={() => changePage('notResolved')}
+              />
+              <ChipComponent
+                label="Acertei"
+                isSeleced={currentQuestionType === 'correct'}
+                onClick={() => changePage('correct')}
+              />
+              <ChipComponent
+                label="Errei"
+                isSeleced={currentQuestionType === 'wrong'}
+                onClick={() => changePage('wrong')}
+              />
+            </div>
+          </div>
+          <ButtonComponent
+            label="Filtrar"
+            className="w-full"
+            onClick={closeModal}
+          />
+          <ButtonComponent label="Limpar" className="w-full" />
+        </div>
+      </DragCloseDrawer>
       <span>Minhas questões</span>
       <div className="mt-2">
         <div>
@@ -55,10 +101,10 @@ export default function Filter() {
           />
         </div>
         <div className="mt-5 space-x-5 flex">
-          <ButtonComponent label="Filtrar" />
+          <ButtonComponent label="Filtrar" onClick={() => openModal()} />
           <ButtonComponent label="Limpar" />
         </div>
       </div>
-    </div>
+    </>
   );
 }
