@@ -2,14 +2,74 @@ import Link from 'next/link';
 import React from 'react';
 
 import { SubjectCategoryEntity } from '@/entities/SubjectCategoryEntity';
-import { axiosReq } from '@/http/axios_helper';
+//import { axiosReq } from '@/http/axios_helper';
 
 import ButtonComponent from '../Button';
 
 const getSubjectCategory = async (): Promise<SubjectCategoryEntity[]> => {
   // eslint-disable-next-line prettier/prettier
-  const { data } = await axiosReq.get<SubjectCategoryEntity[]>('/courseCategory');
-  return data;
+  // const { data } = await axiosReq.get<SubjectCategoryEntity[]>('/courseCategory');
+  // return data;
+  return [
+    {
+      id: '1',
+      createdAt: new Date(),
+      name: 'AWS',
+      updatedAt: new Date(),
+      courses: [
+        {
+          id: '12',
+          courseCategoryId: '1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          name: 'Cloud Patricioner',
+        },
+        {
+          id: '12',
+          courseCategoryId: '1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          name: 'Security',
+        },
+        {
+          id: '12',
+          courseCategoryId: '1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          name: 'Arquiteto',
+        },
+      ],
+    },
+    {
+      id: '2',
+      createdAt: new Date(),
+      name: 'Azure',
+      updatedAt: new Date(),
+      courses: [
+        {
+          id: '12',
+          courseCategoryId: '1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          name: 'IT Especalista',
+        },
+        {
+          id: '12',
+          courseCategoryId: '1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          name: 'Security',
+        },
+        {
+          id: '12',
+          courseCategoryId: '1',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          name: 'Arquiteto',
+        },
+      ],
+    },
+  ];
 };
 
 export default async function ECommerce() {
