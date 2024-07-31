@@ -77,7 +77,6 @@ export default async function ECommerce() {
   console.log(subjectCategories);
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5"></div>
       <div className="w-full flex flex-col rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark mt-5">
         <div>
           <span className="text-3xl">Boas vindas! Vamos estudar?</span>
@@ -91,16 +90,29 @@ export default async function ECommerce() {
           </div>
         </div>
 
-        <div className="flex space-x-5 mt-5">
-          <ButtonComponent label="Continuar de onde parei" />
-          <ButtonComponent label="Explorar todas as questões disponíveis" />
+        <div className="flex flex-col sm:flex-row sm:space-x-5 mt-5">
+          <Link href={'/library/Java'}>
+            <ButtonComponent
+              label="Continuar de onde parei"
+              className="w-full sm:w-auto"
+            />
+          </Link>
+
+          <Link href={'/library/Java'}>
+            <ButtonComponent
+              label="Explorar todas as questões disponíveis"
+              className="w-full sm:w-auto mt-2 sm:mt-0"
+            />
+          </Link>
         </div>
       </div>
 
       <div className="flex flex-col items-center justify-center mt-15">
-        <span className="text-4xl">Explore os mais 15 cursos disponveis</span>
+        <span className="text-4xl text-center">
+          Explore os mais 15 cursos disponveis
+        </span>
 
-        <div className="flex justify-evenly w-full mt-5">
+        <div className="grid grid-cols-2 sm:flex mt-5">
           {[
             {
               name: 'Cloud',
@@ -127,7 +139,7 @@ export default async function ECommerce() {
               image: 'https://media.whizlabs.com/website/g1.webp',
             },
           ].map((el, index) => (
-            <Link href={`/library/${el.name}`} key={index}>
+            <Link href={`/library/${el.name}`} key={index} className="m-3">
               <div className="flex flex-col items-center cursor-pointer">
                 <div className="w-25 h-25 rounded-full bg-gray-200 flex items-center justify-center bg-slate-100 cursor-pointer">
                   <img src={el.image} alt="Imagem no centro" />
@@ -137,7 +149,6 @@ export default async function ECommerce() {
             </Link>
           ))}
         </div>
-        <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5"></div>
       </div>
     </>
   );
