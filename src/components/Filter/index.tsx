@@ -4,6 +4,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
+import { DeviceType, useDeviceType } from '@/hooks/useDeviceType';
 import useModal from '@/hooks/useModal';
 
 import { DragCloseDrawer } from '../Bottomsheet';
@@ -14,7 +15,10 @@ export default function Filter() {
   const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentQuestionType = searchParams.get('questionType') ?? 'all';
+  const currentQuestionType = searchParams.get('questionType') ?? null;
+  const deviceType = useDeviceType();
+
+  const { closeModal, isOpen, openModal } = useModal();
 
   const changePage = (page: string) => {
     const params = new URLSearchParams(searchParams);
@@ -26,7 +30,15 @@ export default function Filter() {
 
     replace(`${pathname}?${params.toString()}`);
   };
-  const { closeModal, isOpen, openModal } = useModal();
+
+  const handleCleanFilters = () => {
+    const params = new URLSearchParams(searchParams);
+    params.delete('questionType');
+  };
+
+  const handleFilter = () => {
+    console.log('Filtrando...');
+  };
   return (
     <>
       <DragCloseDrawer open={isOpen} setOpen={closeModal}>
@@ -62,6 +74,7 @@ export default function Filter() {
           </div>
           <ButtonComponent
             label="Filtrar"
+            disable={!currentQuestionType}
             className="w-full"
             onClick={closeModal}
           />
@@ -100,10 +113,21 @@ export default function Filter() {
         <div className="mt-5 space-x-5 flex">
           <ButtonComponent
             label="Filtrar"
-            onClick={() => openModal()}
+            disable={!currentQuestionType}
+            onClick={() => {
+              deviceType === DeviceType.MOBILE ||
+              deviceType === DeviceType.TABLET
+                ? openModal()
+                : handleFilter();
+            }}
             className="w-full sm:w-auto"
           />
-          <ButtonComponent label="Limpar" className="hidden sm:block" />
+          <ButtonComponent
+            label="Limpar"
+            onClick={handleCleanFilters}
+            className="hidden sm:block"
+            disable={!currentQuestionType}
+          />
         </div>
       </div>
     </>
