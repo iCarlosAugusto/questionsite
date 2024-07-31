@@ -1,3 +1,5 @@
+'use client';
+
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,7 +15,9 @@ export const metadata: Metadata = {
 };
 
 const SignIn: React.FC = () => {
-  const validateForm = () => {};
+  const validateForm = () => {
+    console.log('validanting...');
+  };
 
   return (
     <DefaultLayout showSidebar={false}>
@@ -188,7 +192,11 @@ const SignIn: React.FC = () => {
                   labelText="Senha"
                   type="password"
                 />
-                <ButtonComponent label="Entrar" className="w-full mb-5" />
+                <ButtonComponent
+                  label="Entrar"
+                  className="w-full mb-5"
+                  onClick={validateForm}
+                />
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
                   <span>
                     <svg

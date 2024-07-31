@@ -15,7 +15,10 @@ export default function Library() {
 
           {Array.from({ length: 5 }).map((_, i) => (
             <>
-              <div className="w-full flex flex-col rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark mt-5">
+              <div
+                className="w-full flex flex-col rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark mt-5"
+                key={i}
+              >
                 <div>
                   <p className="text-2xl font-bold">AWS Cloud Patriconer</p>
                   <p className="mb-5">
