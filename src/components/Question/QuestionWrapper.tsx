@@ -55,6 +55,7 @@ export function QuestionWrapper({
       <div className="flex items-center mt-5">
         <ButtonComponent
           label="Confirmar"
+          className="w-full sm:w-auto"
           disable={!alternativeSelected}
           onClick={handleShowAnswer}
         />

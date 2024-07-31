@@ -70,7 +70,7 @@ export default function Filter() {
       </DragCloseDrawer>
       <span>Minhas questões</span>
       <div className="mt-2">
-        <div>
+        <div className="hidden sm:block">
           <ChipComponent
             label="Todas"
             isSeleced={currentQuestionType === 'all'}

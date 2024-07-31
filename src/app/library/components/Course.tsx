@@ -21,7 +21,7 @@ export default function Course() {
       </div>
 
       <Link href="/questions">
-        <ButtonComponent label="Estudar" />
+        <ButtonComponent label="Estudar" className="w-full sm:w-auto" />
       </Link>
     </div>
   );
