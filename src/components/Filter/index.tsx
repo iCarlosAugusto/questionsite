@@ -31,9 +31,6 @@ export default function Filter() {
     <>
       <DragCloseDrawer open={isOpen} setOpen={closeModal}>
         <div className="mx-auto max-w-2xl space-y-4 text-neutral-400">
-          <h2 className="text-4xl font-bold text-neutral-200">
-            Drag the handle at the top of this modal downwards 100px to close it
-          </h2>
           <div className="mt-2">
             <div>
               <ChipComponent
@@ -101,8 +98,12 @@ export default function Filter() {
           />
         </div>
         <div className="mt-5 space-x-5 flex">
-          <ButtonComponent label="Filtrar" onClick={() => openModal()} />
-          <ButtonComponent label="Limpar" />
+          <ButtonComponent
+            label="Filtrar"
+            onClick={() => openModal()}
+            className="w-full sm:w-auto"
+          />
+          <ButtonComponent label="Limpar" className="hidden sm:block" />
         </div>
       </div>
     </>
