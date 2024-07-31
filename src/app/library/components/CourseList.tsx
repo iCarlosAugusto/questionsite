@@ -1,40 +1,44 @@
-'use client';
+// 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+// import React, { useEffect, useState } from 'react';
+// import { useInView } from 'react-intersection-observer';
 
-import { getCourses } from '../server-actions/getCourses';
-import Course from './Course';
+// import { SubjectCategoryEntity } from '@/entities/SubjectCategoryEntity';
 
-interface CourseListProps {
-  initialCourses: any[];
-}
+// import { getAllSubjectsByCategoryId } from '../server-actions/getCourses';
+// import Course from './Course';
 
-export default function CourseList({ initialCourses }: CourseListProps) {
-  const [courses, setCourses] = useState(initialCourses);
-  const { ref, inView } = useInView();
+// interface CourseListProps {
+//   initialCourses: SubjectCategoryEntity[];
+// }
 
-  const loadMoreCourses = async () => {
-    const courses = await getCourses();
+// export default function CourseList({ initialCourses }: CourseListProps) {
+//   const [courses, setCourses] = useState(initialCourses);
+//   const { ref, inView } = useInView();
 
-    setCourses([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-    console.log('Buscando mais....');
-  };
+//   const loadMoreCourses = async () => {
+//     const courses = await getAllSubjectsByCategoryId(
+//       '668f1e74f6941242765096e1',
+//     );
 
-  useEffect(() => {
-    console.log(inView);
-    if (inView) {
-      loadMoreCourses();
-    }
-  }, [inView]);
+//     //setCourses([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+//     console.log('Buscando mais....');
+//   };
 
-  return (
-    <div>
-      {courses.map((_, i) => (
-        <Course key={i} />
-      ))}
+//   useEffect(() => {
+//     console.log(inView);
+//     if (inView) {
+//       loadMoreCourses();
+//     }
+//   }, [inView]);
 
-      <div ref={ref}>Loading...</div>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       {courses.map((_, i) => (
+//         <Course key={i} />
+//       ))}
+
+//       <div ref={ref}>Loading...</div>
+//     </div>
+//   );
+// }
