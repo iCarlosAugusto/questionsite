@@ -1,6 +1,6 @@
 'use client';
 
-import { Metadata } from 'next';
+//import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -9,10 +9,10 @@ import ButtonComponent from '@/components/Button';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import { Textfield } from '@/components/Textfield';
 
-export const metadata: Metadata = {
-  title: 'Next.js SignIn Page | TailAdmin - Next.js Dashboard Template',
-  description: 'This is Next.js Signin Page TailAdmin Dashboard Template',
-};
+// export const metadata: Metadata = {
+//   title: 'Next.js SignIn Page | TailAdmin - Next.js Dashboard Template',
+//   description: 'This is Next.js Signin Page TailAdmin Dashboard Template',
+// };
 
 const SignIn: React.FC = () => {
   const validateForm = () => {
