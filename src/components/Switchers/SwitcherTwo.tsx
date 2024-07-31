@@ -4,6 +4,7 @@ const SwitcherTwo = () => {
   const [enabled, setEnabled] = useState(false);
 
   return (
+    // eslint-disable-next-line react/no-unknown-property
     <div x-data="{ switcherToggle: false }">
       <label
         htmlFor="toggle2"
