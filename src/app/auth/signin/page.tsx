@@ -34,6 +34,7 @@ const SignIn = () => {
   });
 
   const validateForm = (formData: FormData) => {
+    console.log(formState);
     const schema = z.object({
       email: z.string().email('Email inválido'),
       password: z.string().trim().min(1, 'Senha inválida'),
