@@ -4,10 +4,18 @@ interface TextfieldProps {
   labelText?: string;
   type?: 'text' | 'email' | 'password';
   placeholder?: string;
+  name: string;
+  textError?: string;
   icon?: ReactNode;
 }
 
-export function Textfield({ labelText, type, placeholder }: TextfieldProps) {
+export function Textfield({
+  labelText,
+  type,
+  placeholder,
+  name,
+  textError,
+}: TextfieldProps) {
   return (
     <div className="relative">
       <div className="mb-4">
@@ -19,10 +27,12 @@ export function Textfield({ labelText, type, placeholder }: TextfieldProps) {
 
         <div className="relative">
           <input
+            name={name}
             type={type}
             placeholder={placeholder}
             className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
           />
+          {textError && <span className="text-red font-bold">{textError}</span>}
 
           {/* <span className="absolute right-4 top-4">
             <svg
