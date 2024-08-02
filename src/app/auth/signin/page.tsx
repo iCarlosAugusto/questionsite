@@ -1,24 +1,56 @@
 'use client';
-
 //import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import { useFormState } from 'react-dom';
 
 import ButtonComponent from '@/components/Button';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import { Textfield } from '@/components/Textfield';
+import { z } from 'zod';
+
+import { authServerAction } from './actions/authenticate';
 
 // export const metadata: Metadata = {
 //   title: 'Next.js SignIn Page | TailAdmin - Next.js Dashboard Template',
 //   description: 'This is Next.js Signin Page TailAdmin Dashboard Template',
 // };
 
-const SignIn: React.FC = () => {
-  const validateForm = () => {
-    console.log('validanting...');
-  };
+interface FormErrors {
+  email: string | undefined;
+  password: string | undefined;
+}
 
+const SignIn = () => {
+  const [formState, formAction] = useFormState(authServerAction, {
+    message: '',
+    errors: null,
+    fieldValues: {},
+  });
+  const [formErrors, setFormErrors] = useState<FormErrors>({
+    email: undefined,
+    password: undefined,
+  });
+
+  const validateForm = (formData: FormData) => {
+    const schema = z.object({
+      email: z.string().email('Email inválido'),
+      password: z.string().trim().min(1, 'Senha inválida'),
+    });
+
+    const validation = schema.safeParse({
+      email: formData.get('email'),
+      password: formData.get('password'),
+    });
+    setFormErrors({
+      email: validation.error?.formErrors?.fieldErrors?.email?.[0],
+      password: validation.error?.formErrors?.fieldErrors?.password?.[0],
+    });
+    if (validation.success) {
+      formAction();
+    }
+  };
   return (
     <DefaultLayout showSidebar={false}>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -180,22 +212,26 @@ const SignIn: React.FC = () => {
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                 Entrar
               </h2>
-
-              <form>
+              <form action={validateForm}>
                 <Textfield
                   placeholder="Digite seu email"
+                  name="email"
                   labelText="Email"
                   type="email"
+                  textError={formErrors.email}
                 />
+
                 <Textfield
                   placeholder="Digite sua senha"
+                  name="password"
                   labelText="Senha"
                   type="password"
+                  textError={formErrors.password}
                 />
                 <ButtonComponent
+                  type="submit"
                   label="Entrar"
-                  className="w-full mb-5"
-                  onClick={validateForm}
+                  className="w-full mt-5 mb-5"
                 />
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
                   <span>
