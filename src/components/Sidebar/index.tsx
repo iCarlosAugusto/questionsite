@@ -97,6 +97,7 @@ const modalVariants = {
   hidden: {
     opacity: 0,
     x: '-100vh',
+    transition: { easeIn },
   },
   visible: {
     opacity: 1,
@@ -106,7 +107,6 @@ const modalVariants = {
 };
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const [pageName, setPageName] = useLocalStorage('selectedMenu', 'dashboard');
-  if (!sidebarOpen) return null;
   return (
     <AnimatePresence>
       {sidebarOpen && (
@@ -124,7 +124,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             }`}
             variants={modalVariants}
             initial="hidden"
-            animate="visible"
+            animate={sidebarOpen ? 'visible' : 'exit'}
             exit="hidden"
             onClick={(e) => e.stopPropagation()}
           >
