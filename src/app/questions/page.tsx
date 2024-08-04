@@ -79,7 +79,7 @@ const Questions = () => {
   ];
 
   return (
-    <DefaultLayout showSidebar={false}>
+    <DefaultLayout showSidebar={true}>
       <h1 className="text-4xl font-bold ">AWS Questions</h1>
       <span>Foram encontradas 1.343 questões</span>
       <Filter />

@@ -14,20 +14,21 @@ export default function DefaultLayout({
   showSidebar = true,
 }: DefaultLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  console.log(showSidebar);
   return (
     <>
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex">
         {/* <!-- ===== Sidebar Start ===== --> */}
-        {showSidebar && (
-          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        )}
+
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
         <div
-          className={`relative flex flex-1 flex-col ${showSidebar ? 'lg:ml-72.5' : 'lg:ml-0'} `}
+          //className={`relative flex flex-1 flex-col ${showSidebar ? 'lg:ml-72.5' : 'lg:ml-0'} `}
+          className={`relative flex flex-1 flex-col lg:ml-0`}
         >
           {/* <!-- ===== Header Start ===== --> */}
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
