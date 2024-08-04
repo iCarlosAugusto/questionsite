@@ -6,7 +6,7 @@ interface ButtonProps {
   label: string;
   onClick?: () => void;
   disable?: boolean;
-  type: 'button' | 'submit';
+  type?: 'button' | 'submit';
   className?: string;
 }
 
