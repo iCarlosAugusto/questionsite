@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
+import ButtonComponent from '@/components/Button';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 
 export const metadata: Metadata = {
@@ -64,7 +65,7 @@ const Profile = () => {
                     />
                   </svg>
                 </span>
-                <span>Edit</span>
+                <span>Editar</span>
               </label>
             </div>
           </div>
@@ -153,6 +154,7 @@ const Profile = () => {
                   fermentum, pharetra ligula sed, aliquam lacus.
                 </p>
               </div>
+              <ButtonComponent label="Configurações" className="w-full mt-5" />
 
               <div className="mt-6.5">
                 <h4 className="mb-3.5 font-medium text-black dark:text-white">

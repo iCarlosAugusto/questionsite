@@ -113,7 +113,6 @@ export default function Filter() {
         <div className="mt-5 space-x-5 flex">
           <ButtonComponent
             label="Filtrar"
-            disable={!currentQuestionType}
             onClick={() => {
               deviceType === DeviceType.MOBILE ||
               deviceType === DeviceType.TABLET
