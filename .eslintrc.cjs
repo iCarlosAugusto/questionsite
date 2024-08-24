@@ -33,7 +33,9 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    'prettier/prettier': 'error',
+    'prettier/prettier': ['error', {
+      printWidth: 100
+    }],
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'import-helpers/order-imports': [
