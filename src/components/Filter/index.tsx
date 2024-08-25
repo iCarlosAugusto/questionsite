@@ -2,7 +2,8 @@
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 
@@ -105,6 +106,7 @@ export default function Filter() {
         </div>
       </DragCloseDrawer>
       <span>Minhas questões</span>
+      <Toaster />
       <div className="mt-2">
         <div className="flex space-x-5 mb-5">
           <Select

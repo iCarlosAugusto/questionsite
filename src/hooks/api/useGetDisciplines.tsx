@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
 
 import { Discipline } from '@/entities/Discipline';
@@ -9,7 +10,12 @@ const getDisciplines = async (): Promise<Discipline[]> => {
 };
 
 const useGetDisciplines = () => {
-  return useQuery<Discipline[]>('disciplines', () => getDisciplines());
+  return useQuery<Discipline[]>('disciplines', () => getDisciplines(), {
+    retry: false,
+    onError: () => {
+      toast('Ocorreu um erro, tente novamente.');
+    },
+  });
 };
 
 export { useGetDisciplines };
