@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import React from 'react';
 
-import Filter from '@/components/Filter';
+import { Filter } from '@/components/Filter';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Pagination from '@/components/Pagination';
 import QuestionLabel from '@/components/Question';

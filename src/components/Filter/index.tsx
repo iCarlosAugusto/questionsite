@@ -18,7 +18,7 @@ import ChipComponent from '../Chip';
 import { Select } from '../Select';
 import { SelectSection } from '../SelectSection';
 
-export default function Filter() {
+export function Filter() {
   const { replace, refresh } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -41,7 +41,7 @@ export default function Filter() {
     replace(`${pathname}?${params.toString()}`);
   };
 
-  const setDisciplines = (disciplines: Option[]) => {
+  const handleFillDisciplineUrl = (disciplines: Option[]) => {
     const queryStringDisciplines = disciplines.map((item) => item.value).join(', ');
     const params = new URLSearchParams(searchParams);
     const formattedString = queryStringDisciplines.replaceAll(', ', '%');
@@ -97,12 +97,9 @@ export default function Filter() {
     value: string;
   }
 
-  const handleFetchSubject = async (options: Option[]) => {
+  const handleGetSubjects = async (options: Option[]) => {
     console.log('handleFetchSubject');
     console.log(options);
-    // await refetch();
-    // setSubjectOptions(1);
-    // console.log('Subjects: ', subjects);
   };
 
   return (
@@ -153,21 +150,16 @@ export default function Filter() {
         <div className="flex mb-5 space-x-100 relative h-50">
           <Select
             placerholder="Disciplinas"
-            options={[
-              {
-                label: 'Direito Civil',
-                value: 'A2BS',
-              },
-              {
-                label: 'Direito Tributário',
-                value: 'EKAS',
-              },
-              {
-                label: 'Direito Trabalhista',
-                value: '23ML',
-              },
-            ]}
-            onChange={(el) => setDisciplines(el)}
+            options={disciplines?.map((el) => {
+              return {
+                label: el.name,
+                value: el.filterId,
+              } as Option;
+            })}
+            onChange={(disciplines) => {
+              handleFillDisciplineUrl(disciplines);
+              handleGetSubjects(disciplines);
+            }}
           />
           <SelectSection
             placeholder="Matérias"

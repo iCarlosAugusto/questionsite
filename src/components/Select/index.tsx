@@ -9,7 +9,7 @@ interface Option {
 
 interface SelectProps {
   placerholder: string;
-  options: Option[];
+  options: Option[] | undefined;
   onChange: (selectedOptions: Option[]) => void;
 }
 
@@ -28,7 +28,7 @@ export function Select({ options, placerholder, onChange }: SelectProps) {
       }
       const updatedOptions = Array.from(newSelectedOptions).map((val) => ({
         value: val,
-        label: options.find((option) => option.value === val)?.label || '',
+        label: options?.find((option) => option.value === val)?.label || '',
       }));
       onChange(updatedOptions);
       return newSelectedOptions;
@@ -41,6 +41,7 @@ export function Select({ options, placerholder, onChange }: SelectProps) {
         <div
           className="bg-slate-400 p-3 w-40 cursor-pointer rounded"
           onClick={() => {
+            if (!options) return;
             setOpen((prevState) => !prevState);
           }}
         >
@@ -49,7 +50,7 @@ export function Select({ options, placerholder, onChange }: SelectProps) {
 
         {isOpen && (
           <div className="h-50 w-100 bg-slate-400 flex flex-col overflow-y-scroll mt-2 rounded">
-            {options.map((option, key) => (
+            {options?.map((option, key) => (
               <div
                 key={key}
                 className="flex items-center hover:bg-slate-500 cursor-pointer p-2"
