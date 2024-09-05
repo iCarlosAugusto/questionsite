@@ -19,7 +19,7 @@ import { Select } from '../Select';
 import { SelectSection } from '../SelectSection';
 
 export default function Filter() {
-  const { replace } = useRouter();
+  const { replace, refresh } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentQuestionType = searchParams.get('questionType') ?? null;
@@ -71,7 +71,7 @@ export default function Filter() {
   };
 
   const handleFilter = () => {
-    console.log('Filtrando...');
+    refresh();
   };
 
   const getSubjectsByDisciplineId = async (disciplineId: string): Promise<Subject[]> => {

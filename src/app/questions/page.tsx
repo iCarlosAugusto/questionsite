@@ -14,7 +14,14 @@ export const metadata: Metadata = {
     'This is Next.js Profile page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template',
 };
 
-const Questions = () => {
+interface QuestionProps {
+  params: object;
+  searchParams: {
+    disciplinesId: string;
+  };
+}
+
+const Questions = ({ searchParams }: QuestionProps) => {
   const questions: QuestionEntity[] = [
     {
       id: '1',
