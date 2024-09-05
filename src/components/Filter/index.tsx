@@ -41,6 +41,30 @@ export default function Filter() {
     replace(`${pathname}?${params.toString()}`);
   };
 
+  const setDisciplines = (disciplines: Option[]) => {
+    const queryStringDisciplines = disciplines.map((item) => item.value).join(', ');
+    const params = new URLSearchParams(searchParams);
+    const formattedString = queryStringDisciplines.replaceAll(', ', '%');
+    if (formattedString) {
+      params.set('disciplinesId', formattedString);
+    } else {
+      params.delete('disciplinesId');
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const setSubjects = (subjects: Option[]) => {
+    const queryStringSubjects = subjects.map((item) => item.value).join(', ');
+    const params = new URLSearchParams(searchParams);
+    const formattedString = queryStringSubjects.replaceAll(', ', '%');
+    if (queryStringSubjects) {
+      params.set('subjectsId', formattedString);
+    } else {
+      params.delete('subjectsId');
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   const handleCleanFilters = () => {
     const params = new URLSearchParams(searchParams);
     params.delete('questionType');
@@ -131,54 +155,23 @@ export default function Filter() {
             options={[
               {
                 label: 'Direito Civil',
-                value: '1',
+                value: 'A2BS',
               },
               {
                 label: 'Direito Tributário',
-                value: '12',
+                value: 'EKAS',
               },
               {
                 label: 'Direito Trabalhista',
-                value: '123',
+                value: '23ML',
               },
             ]}
-            onChange={(el) => console.log(el)}
+            onChange={(el) => setDisciplines(el)}
           />
           <div className=" flex-row flex content-between bg-red">
             <SelectSection
               placeholder="Disciplinas2"
-              onChange={(el) => console.log(el)}
-              sections={[
-                {
-                  title: 'Direito constitucional',
-                  options: [
-                    {
-                      label: 'Artigo 1',
-                      value: 'A29F',
-                    },
-                    {
-                      label: 'Artigo 2',
-                      value: 'A35L',
-                    },
-                    {
-                      label: 'Artigo 3',
-                      value: '9222',
-                    },
-                    {
-                      label: 'Artigo 4',
-                      value: '111AF',
-                    },
-                    {
-                      label: 'Artigo 5',
-                      value: '2988',
-                    },
-                  ],
-                },
-              ]}
-            />
-            <SelectSection
-              placeholder="Disciplinas3"
-              onChange={(el) => console.log(el)}
+              onChange={(el) => setSubjects(el)}
               sections={[
                 {
                   title: 'Direito constitucional',
