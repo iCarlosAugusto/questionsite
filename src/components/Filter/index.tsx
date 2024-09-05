@@ -150,8 +150,9 @@ export default function Filter() {
       <span>Minhas questões</span>
       <Toaster />
       <div className="mt-2">
-        <div className="flex mb-5 space-x-10">
+        <div className="flex mb-5 space-x-100 relative h-50">
           <Select
+            placerholder="Disciplinas"
             options={[
               {
                 label: 'Direito Civil',
@@ -168,39 +169,37 @@ export default function Filter() {
             ]}
             onChange={(el) => setDisciplines(el)}
           />
-          <div className=" flex-row flex content-between bg-red">
-            <SelectSection
-              placeholder="Disciplinas2"
-              onChange={(el) => setSubjects(el)}
-              sections={[
-                {
-                  title: 'Direito constitucional',
-                  options: [
-                    {
-                      label: 'Artigo 1',
-                      value: 'A29F',
-                    },
-                    {
-                      label: 'Artigo 2',
-                      value: 'A35L',
-                    },
-                    {
-                      label: 'Artigo 3',
-                      value: '9222',
-                    },
-                    {
-                      label: 'Artigo 4',
-                      value: '111AF',
-                    },
-                    {
-                      label: 'Artigo 5',
-                      value: '2988',
-                    },
-                  ],
-                },
-              ]}
-            />
-          </div>
+          <SelectSection
+            placeholder="Matérias"
+            onChange={(el) => setSubjects(el)}
+            sections={[
+              {
+                title: 'Direito constitucional',
+                options: [
+                  {
+                    label: 'Artigo 1',
+                    value: 'A29F',
+                  },
+                  {
+                    label: 'Artigo 2',
+                    value: 'A35L',
+                  },
+                  {
+                    label: 'Artigo 3',
+                    value: '9222',
+                  },
+                  {
+                    label: 'Artigo 4',
+                    value: '111AF',
+                  },
+                  {
+                    label: 'Artigo 5',
+                    value: '2988',
+                  },
+                ],
+              },
+            ]}
+          />
         </div>
 
         <div className="hidden sm:block">
