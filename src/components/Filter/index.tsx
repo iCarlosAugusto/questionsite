@@ -3,17 +3,20 @@
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { Toaster } from 'react-hot-toast';
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+import toast, { Toaster } from 'react-hot-toast';
+import { useQuery } from 'react-query';
 
+import { Subject } from '@/entities/Subject';
 import { useGetDisciplines } from '@/hooks/api/useGetDisciplines';
 import { DeviceType, useDeviceType } from '@/hooks/useDeviceType';
 import useModal from '@/hooks/useModal';
+import { axiosReq } from '@/http/axios_helper';
 
 import { DragCloseDrawer } from '../Bottomsheet';
 import ButtonComponent from '../Button';
 import ChipComponent from '../Chip';
+import { Select } from '../Select';
+import { SelectSection } from '../SelectSection';
 
 export default function Filter() {
   const { replace } = useRouter();
@@ -23,9 +26,9 @@ export default function Filter() {
   const deviceType = useDeviceType();
 
   const { data: disciplines, isLoading: isLoadingDisciplines } = useGetDisciplines();
+  //const { data: subjects, isLoading: isLoadingSubjects, refetch } = useGetSubjectsByDisciplineId();
 
   const { closeModal, isOpen, openModal } = useModal();
-  const animatedComponents = makeAnimated();
 
   const changePage = (page: string) => {
     const params = new URLSearchParams(searchParams);
@@ -47,21 +50,36 @@ export default function Filter() {
     console.log('Filtrando...');
   };
 
-  const colourOptions = [
-    { value: 'cherry', label: 'Cherry', color: '#e26a6a' },
-    { value: 'grape', label: 'Grape', color: '#6a1b9a' },
-    { value: 'lime', label: 'Lime', color: '#cddc39' },
-    { value: 'mango', label: 'Mango', color: '#ff9800' },
-    { value: 'orange', label: 'Orange', color: '#ff5722' },
-    { value: 'peach', label: 'Peach', color: '#ffcc80' },
-  ];
+  const getSubjectsByDisciplineId = async (disciplineId: string): Promise<Subject[]> => {
+    console.log('DisciplineId: ', disciplineId);
+    const { data } = await axiosReq.get(`/discipline/${disciplineId}/subject`);
+    return data;
+  };
 
-  const disciplineOptions = disciplines?.map((discipline) => {
-    return {
-      value: discipline.name,
-      label: discipline.name,
-    };
+  const {
+    data: subjects,
+    isLoading: isLoadingSubjects,
+    refetch,
+  } = useQuery<Subject[]>(['subjects'], () => getSubjectsByDisciplineId('123'), {
+    retry: false,
+    enabled: false,
+    onError: () => {
+      toast('Ocorreu um erro, tente novamente.');
+    },
   });
+
+  interface Option {
+    label: string;
+    value: string;
+  }
+
+  const handleFetchSubject = async (options: Option[]) => {
+    console.log('handleFetchSubject');
+    console.log(options);
+    // await refetch();
+    // setSubjectOptions(1);
+    // console.log('Subjects: ', subjects);
+  };
 
   return (
     <>
@@ -108,27 +126,88 @@ export default function Filter() {
       <span>Minhas questões</span>
       <Toaster />
       <div className="mt-2">
-        <div className="flex space-x-5 mb-5">
+        <div className="flex mb-5 space-x-10">
           <Select
-            closeMenuOnSelect={false}
-            components={animatedComponents}
-            isMulti
-            isLoading={isLoadingDisciplines}
-            isDisabled={isLoadingDisciplines}
-            options={disciplineOptions}
-            className="my-react-select-container w-1/2"
-            classNamePrefix="my-react-select"
+            options={[
+              {
+                label: 'Direito Civil',
+                value: '1',
+              },
+              {
+                label: 'Direito Tributário',
+                value: '12',
+              },
+              {
+                label: 'Direito Trabalhista',
+                value: '123',
+              },
+            ]}
+            onChange={(el) => console.log(el)}
           />
-          <Select
-            closeMenuOnSelect={false}
-            components={animatedComponents}
-            isLoading={true}
-            isDisabled={true}
-            isMulti
-            options={colourOptions}
-            className="my-react-select-container w-1/2"
-            classNamePrefix="my-react-select"
-          />
+          <div className=" flex-row flex content-between bg-red">
+            <SelectSection
+              placeholder="Disciplinas2"
+              onChange={(el) => console.log(el)}
+              sections={[
+                {
+                  title: 'Direito constitucional',
+                  options: [
+                    {
+                      label: 'Artigo 1',
+                      value: 'A29F',
+                    },
+                    {
+                      label: 'Artigo 2',
+                      value: 'A35L',
+                    },
+                    {
+                      label: 'Artigo 3',
+                      value: '9222',
+                    },
+                    {
+                      label: 'Artigo 4',
+                      value: '111AF',
+                    },
+                    {
+                      label: 'Artigo 5',
+                      value: '2988',
+                    },
+                  ],
+                },
+              ]}
+            />
+            <SelectSection
+              placeholder="Disciplinas3"
+              onChange={(el) => console.log(el)}
+              sections={[
+                {
+                  title: 'Direito constitucional',
+                  options: [
+                    {
+                      label: 'Artigo 1',
+                      value: 'A29F',
+                    },
+                    {
+                      label: 'Artigo 2',
+                      value: 'A35L',
+                    },
+                    {
+                      label: 'Artigo 3',
+                      value: '9222',
+                    },
+                    {
+                      label: 'Artigo 4',
+                      value: '111AF',
+                    },
+                    {
+                      label: 'Artigo 5',
+                      value: '2988',
+                    },
+                  ],
+                },
+              ]}
+            />
+          </div>
         </div>
 
         <div className="hidden sm:block">
