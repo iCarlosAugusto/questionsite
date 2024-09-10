@@ -153,7 +153,7 @@ export function Filter() {
             options={disciplines?.map((el) => {
               return {
                 label: el.name,
-                value: el.filterId,
+                value: el.id,
               } as Option;
             })}
             onChange={(disciplines) => {
@@ -170,23 +170,23 @@ export function Filter() {
                 options: [
                   {
                     label: 'Artigo 1',
-                    value: 'A29F',
+                    value: '1',
                   },
                   {
                     label: 'Artigo 2',
-                    value: 'A35L',
+                    value: '2',
                   },
                   {
                     label: 'Artigo 3',
-                    value: '9222',
+                    value: '3',
                   },
                   {
                     label: 'Artigo 4',
-                    value: '111AF',
+                    value: '4',
                   },
                   {
                     label: 'Artigo 5',
-                    value: '2988',
+                    value: '5',
                   },
                 ],
               },

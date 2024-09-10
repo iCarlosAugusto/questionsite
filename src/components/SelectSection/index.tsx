@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 import ClickOutside from '../ClickOutside';
 
@@ -20,26 +21,32 @@ interface SelectSectionProps {
 
 export function SelectSection({ sections, onChange, placeholder }: SelectSectionProps) {
   const [isOpen, setOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<Set<string>>(new Set());
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const handleOptionChange = (value: string) => {
-    setSelectedOptions((prevSelectedOptions) => {
-      const newSelectedOptions = new Set(prevSelectedOptions);
-      if (newSelectedOptions.has(value)) {
-        newSelectedOptions.delete(value);
-      } else {
-        newSelectedOptions.add(value);
-      }
-      const updatedOptions = Array.from(newSelectedOptions).map((val) => ({
-        value: val,
-        label:
-          sections.flatMap((section) => section.options).find((option) => option.value === val)
-            ?.label || '',
-      }));
-      onChange(updatedOptions);
-      return newSelectedOptions;
+  const handleItemClick = (itemId: string) => {
+    const currentDisciplines = searchParams.get('subjects');
+    const currentIds = currentDisciplines ? currentDisciplines.split('%') : [];
+
+    const itemExists = currentIds.includes(String(itemId));
+
+    const updatedIds = itemExists
+      ? currentIds.filter((id) => id !== String(itemId))
+      : [...currentIds, itemId];
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (updatedIds.length > 0) {
+      params.set('subjects', updatedIds.join('%'));
+    } else {
+      params.delete('subjects');
+    }
+    replace(`${pathname}?${params.toString()}`, {
+      scroll: false,
     });
   };
+
+  const subjects = searchParams.get('subjects')?.split('%');
 
   return (
     <ClickOutside onClick={() => setOpen(false)} className="absolute">
@@ -51,11 +58,7 @@ export function SelectSection({ sections, onChange, placeholder }: SelectSection
               setOpen((oldState) => !oldState);
             }}
           >
-            <span className="text-black">
-              {selectedOptions.size === 0
-                ? placeholder
-                : selectedOptions.size.toString() + ' ' + placeholder}
-            </span>
+            <span className="text-black">Disciplinas</span>
           </div>
         </div>
         {isOpen && (
@@ -69,12 +72,13 @@ export function SelectSection({ sections, onChange, placeholder }: SelectSection
                   <div
                     key={key}
                     className="flex items-center hover:bg-slate-500 cursor-pointer p-2"
-                    onClick={() => handleOptionChange(option.value)}
+                    onClick={() => handleItemClick(option.value)}
                   >
                     <input
                       type="checkbox"
                       className="mr-2"
-                      checked={selectedOptions.has(option.value)}
+                      onChange={() => {}}
+                      checked={subjects?.includes(option.value) ?? false}
                     />
                     <span className="text-black"> {option.label}</span>
                   </div>
