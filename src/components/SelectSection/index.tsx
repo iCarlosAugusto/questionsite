@@ -1,5 +1,5 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 import ClickOutside from '../ClickOutside';
 
@@ -19,7 +19,7 @@ interface SelectSectionProps {
   onChange: (selectedOptions: Option[]) => void;
 }
 
-export function SelectSection({ sections, onChange, placeholder }: SelectSectionProps) {
+export function SelectSection({ sections, placeholder }: SelectSectionProps) {
   const [isOpen, setOpen] = useState(false);
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -58,7 +58,7 @@ export function SelectSection({ sections, onChange, placeholder }: SelectSection
               setOpen((oldState) => !oldState);
             }}
           >
-            <span className="text-black">Disciplinas</span>
+            <span className="text-black">{placeholder}</span>
           </div>
         </div>
         {isOpen && (

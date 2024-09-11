@@ -29,6 +29,12 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },

@@ -1,3 +1,4 @@
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import ClickOutside from '../ClickOutside';
@@ -10,30 +11,36 @@ interface Option {
 interface SelectProps {
   placerholder: string;
   options: Option[] | undefined;
-  onChange: (selectedOptions: Option[]) => void;
 }
 
-export function Select({ options, placerholder, onChange }: SelectProps) {
+export function Select({ options, placerholder }: SelectProps) {
   const [isOpen, setOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState<Set<string>>(new Set());
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const handleOptionChange = (value: string) => {
-    console.log('handleOptionChange');
-    setSelectedOptions((prevSelectedOptions) => {
-      const newSelectedOptions = new Set(prevSelectedOptions);
-      if (newSelectedOptions.has(value)) {
-        newSelectedOptions.delete(value);
-      } else {
-        newSelectedOptions.add(value);
-      }
-      const updatedOptions = Array.from(newSelectedOptions).map((val) => ({
-        value: val,
-        label: options?.find((option) => option.value === val)?.label || '',
-      }));
-      onChange(updatedOptions);
-      return newSelectedOptions;
+  const handleItemClick = (itemId: string) => {
+    const currentDisciplines = searchParams.get('disciplines');
+    const currentIds = currentDisciplines ? currentDisciplines.split('%') : [];
+
+    const itemExists = currentIds.includes(String(itemId));
+
+    const updatedIds = itemExists
+      ? currentIds.filter((id) => id !== String(itemId))
+      : [...currentIds, itemId];
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (updatedIds.length > 0) {
+      params.set('disciplines', updatedIds.join('%'));
+    } else {
+      params.delete('disciplines');
+    }
+    replace(`${pathname}?${params.toString()}`, {
+      scroll: false,
     });
   };
+
+  const disciplines = searchParams.get('disciplines')?.split('%');
 
   return (
     <ClickOutside onClick={() => setOpen(false)}>
@@ -55,13 +62,13 @@ export function Select({ options, placerholder, onChange }: SelectProps) {
                 key={key}
                 className="flex items-center hover:bg-slate-500 cursor-pointer p-2"
                 onClick={() => {
-                  handleOptionChange(option.value);
+                  handleItemClick(option.value);
                 }}
               >
                 <input
                   type="checkbox"
                   className="mr-2"
-                  checked={selectedOptions.has(option.value)}
+                  checked={disciplines?.includes(option.value) ?? false}
                 />
                 <span className="text-black"> {option.label}</span>
               </div>

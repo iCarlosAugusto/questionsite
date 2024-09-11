@@ -6,6 +6,7 @@ import React from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useQuery } from 'react-query';
 
+import { Discipline } from '@/entities/Discipline';
 import { Subject } from '@/entities/Subject';
 import { useGetDisciplines } from '@/hooks/api/useGetDisciplines';
 import { DeviceType, useDeviceType } from '@/hooks/useDeviceType';
@@ -25,7 +26,7 @@ export function Filter() {
   const currentQuestionType = searchParams.get('questionType') ?? null;
   const deviceType = useDeviceType();
 
-  const { data: disciplines, isLoading: isLoadingDisciplines } = useGetDisciplines();
+  //const { data: disciplines, isLoading: isLoadingDisciplines } = useGetDisciplines();
   //const { data: subjects, isLoading: isLoadingSubjects, refetch } = useGetSubjectsByDisciplineId();
 
   const { closeModal, isOpen, openModal } = useModal();
@@ -101,7 +102,23 @@ export function Filter() {
     console.log('handleFetchSubject');
     console.log(options);
   };
-
+  const disciplines: Discipline[] = [
+    {
+      id: '1',
+      filterId: '2',
+      name: 'Direito Constitucional',
+    },
+    {
+      id: '2',
+      filterId: '3',
+      name: 'Direito Tributário',
+    },
+    {
+      id: '3',
+      filterId: '21',
+      name: 'Direito Civil',
+    },
+  ];
   return (
     <>
       <DragCloseDrawer open={isOpen} setOpen={closeModal}>
@@ -156,10 +173,6 @@ export function Filter() {
                 value: el.id,
               } as Option;
             })}
-            onChange={(disciplines) => {
-              handleFillDisciplineUrl(disciplines);
-              handleGetSubjects(disciplines);
-            }}
           />
           <SelectSection
             placeholder="Matérias"
