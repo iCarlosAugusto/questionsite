@@ -7,6 +7,9 @@ import Pagination from '@/components/Pagination';
 import QuestionLabel from '@/components/Question';
 import { QuestionWrapper } from '@/components/Question/QuestionWrapper';
 import { QuestionEntity } from '@/entities/QuestionEntity';
+import axios from 'axios';
+
+import { useGetDisciplines } from '../../hooks/api/useGetDisciplines';
 
 export const metadata: Metadata = {
   title: 'AWS Questions',
@@ -21,7 +24,7 @@ interface QuestionProps {
   };
 }
 
-const Questions = ({ searchParams }: QuestionProps) => {
+export default async function Question() {
   const questions: QuestionEntity[] = [
     {
       id: '1',
@@ -84,7 +87,8 @@ const Questions = ({ searchParams }: QuestionProps) => {
       ],
     },
   ];
-
+  const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+  console.log(data);
   return (
     <DefaultLayout showSidebar={true}>
       <h1 className="text-4xl font-bold ">AWS Questions</h1>
@@ -99,6 +103,4 @@ const Questions = ({ searchParams }: QuestionProps) => {
       <Pagination />
     </DefaultLayout>
   );
-};
-
-export default Questions;
+}

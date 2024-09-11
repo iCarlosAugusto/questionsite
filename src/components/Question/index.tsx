@@ -5,7 +5,6 @@ interface QuestionLabelProps {
 }
 
 export default function QuestionLabel({ label }: QuestionLabelProps) {
-  console.log('Question Label');
   return (
     <>
       <p>{label}</p>

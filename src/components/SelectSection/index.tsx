@@ -1,4 +1,4 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import ClickOutside from '../ClickOutside';
@@ -16,12 +16,10 @@ interface Option {
 interface SelectSectionProps {
   placeholder: string;
   sections: Section[];
-  onChange: (selectedOptions: Option[]) => void;
 }
 
 export function SelectSection({ sections, placeholder }: SelectSectionProps) {
   const [isOpen, setOpen] = useState(false);
-  const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -41,9 +39,7 @@ export function SelectSection({ sections, placeholder }: SelectSectionProps) {
     } else {
       params.delete('subjects');
     }
-    replace(`${pathname}?${params.toString()}`, {
-      scroll: false,
-    });
+    window.history.pushState(null, '', `${pathname}?${params.toString()}`);
   };
 
   const subjects = searchParams.get('subjects')?.split('%');

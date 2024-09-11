@@ -1,4 +1,4 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import ClickOutside from '../ClickOutside';
@@ -15,7 +15,6 @@ interface SelectProps {
 
 export function Select({ options, placerholder }: SelectProps) {
   const [isOpen, setOpen] = useState(false);
-  const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -35,9 +34,7 @@ export function Select({ options, placerholder }: SelectProps) {
     } else {
       params.delete('disciplines');
     }
-    replace(`${pathname}?${params.toString()}`, {
-      scroll: false,
-    });
+    window.history.pushState(null, '', `${pathname}?${params.toString()}`);
   };
 
   const disciplines = searchParams.get('disciplines')?.split('%');

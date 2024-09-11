@@ -176,7 +176,6 @@ export function Filter() {
           />
           <SelectSection
             placeholder="Matérias"
-            onChange={(el) => setSubjects(el)}
             sections={[
               {
                 title: 'Direito constitucional',
