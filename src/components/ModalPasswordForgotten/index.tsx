@@ -29,7 +29,7 @@ interface ModalProps {
   closeModal: () => void;
 }
 
-const Modal = ({ isOpen, closeModal }: ModalProps) => {
+const ModalPasswordForgotten = ({ isOpen, closeModal }: ModalProps) => {
   const [currentAnimation, setCurrentAnimation] = useState<'hidden' | 'visible'>('visible');
 
   const handleCloseAnimation = async () => {
@@ -66,7 +66,7 @@ const Modal = ({ isOpen, closeModal }: ModalProps) => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex items-center justify-between mb-4">
-            <span className="text-xl font-bold  text-orange-500">Entrar na sua conta</span>
+            <span className="text-xl font-bold  text-orange-500">Recuperar minha senha</span>
             <Image
               src={Close}
               alt="Close button"
@@ -77,32 +77,13 @@ const Modal = ({ isOpen, closeModal }: ModalProps) => {
             />
           </div>
 
-          <p className="mb-4">
-            Seja bem-vindo! Ficamos felizes em ter você por aqui!
-            <br />
-            Preparado para tirar sua certificação?
-          </p>
-          <Link href="/auth/signin">
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded w-full"
-              onClick={closeModal}
-            >
-              Acessar conta
-            </button>
-          </Link>
-
-          <Link href="/auth/signup">
-            <button
-              className="bg-blue-500 text-white px-4 py-2 rounded w-full mt-5"
-              onClick={closeModal}
-            >
-              Criar conta
-            </button>
-          </Link>
+          <span className="mb-4">
+            Entre em contato com o nosso time de suporte via Whatsapp ou email
+          </span>
         </motion.div>
       </motion.div>
     )
   );
 };
 
-export default Modal;
+export { ModalPasswordForgotten };

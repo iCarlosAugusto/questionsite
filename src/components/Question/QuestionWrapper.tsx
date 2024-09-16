@@ -16,11 +16,7 @@ interface QuestionWrapperProps {
   children: ReactNode;
 }
 
-export function QuestionWrapper({
-  id,
-  alternatives,
-  children,
-}: QuestionWrapperProps) {
+export function QuestionWrapper({ id, alternatives, children }: QuestionWrapperProps) {
   // eslint-disable-next-line prettier/prettier
   const [alternativeSelected, setAlternativeSelected] = useState<AlternativeEntity | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -52,14 +48,20 @@ export function QuestionWrapper({
         </div>
       ))}
 
-      <div className="flex items-center mt-5">
+      <div className="flex flex-col sm:flex-row items-center mt-5">
         <ButtonComponent
           label="Confirmar"
           className="w-full sm:w-auto"
           disable={!alternativeSelected}
           onClick={handleShowAnswer}
         />
-        {showAnswer && <span className="ml-5">Você respondeu</span>}
+        {showAnswer && (
+          <div className="mt-5 sm:mt-0 sm:ml-5 w-full sm:w-auto bg-red opacity-80 p-4 rounded flex items-center justify-center">
+            <span className="font-bold text-center text-white">
+              Você errou! Resposta correta: A
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

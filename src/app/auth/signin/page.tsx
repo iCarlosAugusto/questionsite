@@ -7,7 +7,9 @@ import { useFormState } from 'react-dom';
 
 import ButtonComponent from '@/components/Button';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
+import { ModalPasswordForgotten } from '@/components/ModalPasswordForgotten';
 import { Textfield } from '@/components/Textfield';
+import useModal from '@/hooks/useModal';
 import { z } from 'zod';
 
 import { authServerAction } from './actions/authenticate';
@@ -52,8 +54,16 @@ const SignIn = () => {
       formAction();
     }
   };
+  const { isOpen, openModal, closeModal } = useModal();
+
+  const handleForgotPassword = () => {
+    openModal();
+  };
+
   return (
     <DefaultLayout showSidebar={false}>
+      {isOpen && <ModalPasswordForgotten closeModal={closeModal} isOpen={isOpen} />}
+
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
@@ -76,8 +86,7 @@ const SignIn = () => {
               </Link>
 
               <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit suspendisse.
               </p>
 
               <span className="mt-15 inline-block">
@@ -120,18 +129,12 @@ const SignIn = () => {
                     d="M190.017 158.289H123.208C122.572 158.288 121.962 158.035 121.512 157.586C121.062 157.137 120.809 156.527 120.809 155.892V89.1315C120.809 88.496 121.062 87.8866 121.512 87.4372C121.962 86.9878 122.572 86.735 123.208 86.7343H190.017C190.653 86.735 191.263 86.9878 191.713 87.4372C192.163 87.8866 192.416 88.496 192.416 89.1315V155.892C192.416 156.527 192.163 157.137 191.713 157.586C191.263 158.035 190.653 158.288 190.017 158.289ZM123.208 87.6937C122.826 87.6941 122.46 87.8457 122.19 88.1154C121.92 88.385 121.769 88.7507 121.768 89.132V155.892C121.769 156.274 121.92 156.639 122.19 156.909C122.46 157.178 122.826 157.33 123.208 157.33H190.017C190.399 157.33 190.765 157.178 191.035 156.909C191.304 156.639 191.456 156.274 191.457 155.892V89.132C191.456 88.7507 191.304 88.385 191.035 88.1154C190.765 87.8457 190.399 87.6941 190.017 87.6937H123.208Z"
                     fill="#CCCCCC"
                   />
-                  <path
-                    d="M204.934 209.464H102.469V210.423H204.934V209.464Z"
-                    fill="#CCCCCC"
-                  />
+                  <path d="M204.934 209.464H102.469V210.423H204.934V209.464Z" fill="#CCCCCC" />
                   <path
                     d="M105.705 203.477C107.492 203.477 108.941 202.029 108.941 200.243C108.941 198.457 107.492 197.01 105.705 197.01C103.918 197.01 102.469 198.457 102.469 200.243C102.469 202.029 103.918 203.477 105.705 203.477Z"
                     fill="#3056D3"
                   />
-                  <path
-                    d="M204.934 241.797H102.469V242.757H204.934V241.797Z"
-                    fill="#CCCCCC"
-                  />
+                  <path d="M204.934 241.797H102.469V242.757H204.934V241.797Z" fill="#CCCCCC" />
                   <path
                     d="M105.705 235.811C107.492 235.811 108.941 234.363 108.941 232.577C108.941 230.791 107.492 229.344 105.705 229.344C103.918 229.344 102.469 230.791 102.469 232.577C102.469 234.363 103.918 235.811 105.705 235.811Z"
                     fill="#3056D3"
@@ -207,9 +210,7 @@ const SignIn = () => {
 
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-              <span className="mb-1.5 block font-medium">
-                Comece a estudar hoje gratuitamente!
-              </span>
+              <span className="mb-1.5 block font-medium">Comece a estudar hoje gratuitamente!</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                 Entrar
               </h2>
@@ -229,11 +230,10 @@ const SignIn = () => {
                   type="password"
                   textError={formErrors.password}
                 />
-                <ButtonComponent
-                  type="submit"
-                  label="Entrar"
-                  className="w-full mt-5 mb-5"
-                />
+                <span className="cursor-pointer" onClick={handleForgotPassword}>
+                  Esqueci minha senha
+                </span>
+                <ButtonComponent type="submit" label="Entrar" className="w-full mt-5 mb-5" />
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
                   <span>
                     <svg
@@ -272,9 +272,10 @@ const SignIn = () => {
                 </button>
                 <div className="mt-6 text-center">
                   <p>
-                    Don’t have any account?{' '}
+                    Ainda não tem conta?
                     <Link href="/auth/signup" className="text-primary">
-                      Sign Up
+                      {' '}
+                      Crie agora!
                     </Link>
                   </p>
                 </div>

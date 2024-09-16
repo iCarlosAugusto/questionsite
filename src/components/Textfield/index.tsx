@@ -9,20 +9,12 @@ interface TextfieldProps {
   icon?: ReactNode;
 }
 
-export function Textfield({
-  labelText,
-  type,
-  placeholder,
-  name,
-  textError,
-}: TextfieldProps) {
+export function Textfield({ labelText, type, placeholder, name, textError }: TextfieldProps) {
   return (
     <div className="relative">
       <div className="mb-4">
         {labelText && (
-          <label className="mb-2.5 block font-medium text-black dark:text-white">
-            {labelText}
-          </label>
+          <label className="mb-2.5 block font-medium text-black dark:text-white">{labelText}</label>
         )}
 
         <div className="relative">

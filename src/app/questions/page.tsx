@@ -87,8 +87,8 @@ export default async function Question() {
       ],
     },
   ];
-  const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
-  console.log(data);
+  // const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+  // console.log(data);
   return (
     <DefaultLayout showSidebar={true}>
       <h1 className="text-4xl font-bold ">AWS Questions</h1>
