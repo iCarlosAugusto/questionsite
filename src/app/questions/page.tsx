@@ -40,7 +40,7 @@ export default async function Question({ params, searchParams }: QuestionProps) 
           <QuestionLabel label={currentQuestion.text} key={index} />
         </QuestionWrapper>
       ))}
-      <Pagination totalPages={1} />
+      <Pagination totalPages={data.totalPages} />
     </DefaultLayout>
   );
 }
