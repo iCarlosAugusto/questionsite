@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Filter } from '@/components/Filter';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
-import Pagination from '@/components/Pagination';
+import { Pagination } from '@/components/Pagination';
 import QuestionLabel from '@/components/Question';
 import { QuestionWrapper } from '@/components/Question/QuestionWrapper';
 import { Pagable } from '@/entities/Pageable';
@@ -19,18 +19,20 @@ export const metadata: Metadata = {
 interface QuestionProps {
   params: object;
   searchParams: {
+    page: string;
     disciplinesId: string;
   };
 }
 
-export default async function Question() {
-  const { data } = await axiosReq.get<Pagable<QuestionEntity>>('/question');
+export default async function Question({ params, searchParams }: QuestionProps) {
+  const currentPage = searchParams.page ? Number(searchParams.page) - 1 : 0;
+  const { data } = await axiosReq.get<Pagable<QuestionEntity>>(`/question?page=${currentPage}`);
   const questions = data.content;
 
   return (
     <DefaultLayout showSidebar={true}>
       <h1 className="text-4xl font-bold ">AWS Questions</h1>
-      <span>Foram encontradas 1.343 questões</span>
+      <span>Foram encontradas {data.totalElements} questões</span>
       <Filter />
 
       {questions.map((currentQuestion, index) => (
@@ -38,7 +40,7 @@ export default async function Question() {
           <QuestionLabel label={currentQuestion.text} key={index} />
         </QuestionWrapper>
       ))}
-      <Pagination />
+      <Pagination totalPages={1} />
     </DefaultLayout>
   );
 }
