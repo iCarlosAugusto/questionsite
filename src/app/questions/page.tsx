@@ -6,10 +6,9 @@ import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Pagination from '@/components/Pagination';
 import QuestionLabel from '@/components/Question';
 import { QuestionWrapper } from '@/components/Question/QuestionWrapper';
+import { Pagable } from '@/entities/Pageable';
 import { QuestionEntity } from '@/entities/QuestionEntity';
-import axios from 'axios';
-
-import { useGetDisciplines } from '../../hooks/api/useGetDisciplines';
+import { axiosReq } from '@/http/axios_helper';
 
 export const metadata: Metadata = {
   title: 'AWS Questions',
@@ -25,70 +24,9 @@ interface QuestionProps {
 }
 
 export default async function Question() {
-  const questions: QuestionEntity[] = [
-    {
-      id: '1',
-      text: 'Quanto é 1+1',
-      alternatives: [
-        {
-          id: '2',
-          questionId: '1',
-          textAlternative: '2',
-          isCorrect: true,
-        },
-        {
-          id: '2',
-          questionId: '1',
-          textAlternative: '11',
-          isCorrect: false,
-        },
-        {
-          id: '3',
-          questionId: '1',
-          textAlternative: '333',
-          isCorrect: true,
-        },
-        {
-          id: '4',
-          questionId: '1',
-          textAlternative: '444',
-          isCorrect: true,
-        },
-      ],
-    },
-    {
-      id: '2',
-      text: 'Quanto é 2+2',
-      alternatives: [
-        {
-          id: '1',
-          questionId: '2',
-          textAlternative: '2',
-          isCorrect: false,
-        },
-        {
-          id: '2',
-          questionId: '2',
-          textAlternative: '4',
-          isCorrect: true,
-        },
-        {
-          id: '3',
-          questionId: '2',
-          textAlternative: '999',
-          isCorrect: true,
-        },
-        {
-          id: '4',
-          questionId: '2',
-          textAlternative: '1232',
-          isCorrect: true,
-        },
-      ],
-    },
-  ];
-  // const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
-  // console.log(data);
+  const { data } = await axiosReq.get<Pagable<QuestionEntity>>('/question');
+  const questions = data.content;
+
   return (
     <DefaultLayout showSidebar={true}>
       <h1 className="text-4xl font-bold ">AWS Questions</h1>
