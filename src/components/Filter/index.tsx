@@ -2,13 +2,10 @@
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import React from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import { useQuery } from 'react-query';
+import React, { useEffect, useState } from 'react';
 
 import { Discipline } from '@/entities/Discipline';
 import { Subject } from '@/entities/Subject';
-import { useGetDisciplines } from '@/hooks/api/useGetDisciplines';
 import { DeviceType, useDeviceType } from '@/hooks/useDeviceType';
 import useModal from '@/hooks/useModal';
 import { axiosReq } from '@/http/axios_helper';
@@ -26,9 +23,6 @@ export function Filter() {
   const currentQuestionType = searchParams.get('questionType') ?? null;
   const deviceType = useDeviceType();
 
-  //const { data: disciplines, isLoading: isLoadingDisciplines } = useGetDisciplines();
-  //const { data: subjects, isLoading: isLoadingSubjects, refetch } = useGetSubjectsByDisciplineId();
-
   const { closeModal, isOpen, openModal } = useModal();
 
   const changePage = (page: string) => {
@@ -42,30 +36,6 @@ export function Filter() {
     replace(`${pathname}?${params.toString()}`);
   };
 
-  const handleFillDisciplineUrl = (disciplines: Option[]) => {
-    const queryStringDisciplines = disciplines.map((item) => item.value).join(', ');
-    const params = new URLSearchParams(searchParams);
-    const formattedString = queryStringDisciplines.replaceAll(', ', '%');
-    if (formattedString) {
-      params.set('disciplinesId', formattedString);
-    } else {
-      params.delete('disciplinesId');
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
-
-  const setSubjects = (subjects: Option[]) => {
-    const queryStringSubjects = subjects.map((item) => item.value).join(', ');
-    const params = new URLSearchParams(searchParams);
-    const formattedString = queryStringSubjects.replaceAll(', ', '%');
-    if (queryStringSubjects) {
-      params.set('subjectsId', formattedString);
-    } else {
-      params.delete('subjectsId');
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
-
   const handleCleanFilters = () => {
     const params = new URLSearchParams(searchParams);
     params.delete('questionType');
@@ -75,50 +45,48 @@ export function Filter() {
     refresh();
   };
 
-  const getSubjectsByDisciplineId = async (disciplineId: string): Promise<Subject[]> => {
-    console.log('DisciplineId: ', disciplineId);
-    const { data } = await axiosReq.get(`/discipline/${disciplineId}/subject`);
-    return data;
-  };
-
-  const {
-    data: subjects,
-    isLoading: isLoadingSubjects,
-    refetch,
-  } = useQuery<Subject[]>(['subjects'], () => getSubjectsByDisciplineId('123'), {
-    retry: false,
-    enabled: false,
-    onError: () => {
-      toast('Ocorreu um erro, tente novamente.');
-    },
-  });
-
   interface Option {
     label: string;
     value: string;
   }
 
-  const handleGetSubjects = async (options: Option[]) => {
-    console.log('handleFetchSubject');
-    console.log(options);
+  const [disciplines, setDisciplines] = useState<Discipline[]>([]);
+  const [subjects, setSubjects] = useState<Subject[]>([]);
+  const [isLoadingDisciplines, setLoadingDisciplines] = useState(false);
+  const [isLoadingSubjects, setLoadingSubjects] = useState(false);
+
+  const getDiscipliens = async () => {
+    setLoadingDisciplines(true);
+    try {
+      const { data } = await axiosReq.get<Discipline[]>('/discipline');
+      setDisciplines(data);
+    } catch (error) {
+      console.log('erro');
+    } finally {
+      setLoadingDisciplines(false);
+    }
   };
-  const disciplines: Discipline[] = [
-    {
-      id: '1',
-      filterId: '2',
-      name: 'Direito Constitucional',
-    },
-    {
-      id: '2',
-      filterId: '3',
-      name: 'Direito Tributário',
-    },
-    {
-      id: '3',
-      filterId: '21',
-      name: 'Direito Civil',
-    },
-  ];
+
+  const getSubjects = async () => {
+    setLoadingSubjects(true);
+    try {
+      const { data } = await axiosReq.get<Subject[]>('/subject');
+      setSubjects(data);
+    } catch (error) {
+      console.log('erro');
+    } finally {
+      setLoadingSubjects(false);
+    }
+  };
+
+  useEffect(() => {
+    getDiscipliens();
+  }, []);
+
+  useEffect(() => {
+    getSubjects();
+  }, [disciplines]);
+
   return (
     <>
       <DragCloseDrawer open={isOpen} setOpen={closeModal}>
@@ -162,7 +130,7 @@ export function Filter() {
         </div>
       </DragCloseDrawer>
       <span>Minhas questões</span>
-      <Toaster />
+
       <div className="mt-2">
         <div className="flex mb-5 space-x-100 relative h-50">
           <Select

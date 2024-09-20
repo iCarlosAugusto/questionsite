@@ -15,7 +15,7 @@ interface Option {
 
 interface SelectSectionProps {
   placeholder: string;
-  sections: Section[];
+  sections: Section[] | undefined;
 }
 
 export function SelectSection({ sections, placeholder }: SelectSectionProps) {
