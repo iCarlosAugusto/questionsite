@@ -4,6 +4,7 @@ import React, { ReactNode, useState } from 'react';
 
 import { AlternativeEntity } from '@/entities/AlternativeEntity';
 import useModal from '@/hooks/useModal';
+import { axiosReq } from '@/http/axios_helper';
 
 import { AlternativeLabel } from '../Alternative';
 import { AlternativeWrapper } from '../Alternative/AlternativeWrapper';
@@ -16,11 +17,32 @@ interface QuestionWrapperProps {
   children: ReactNode;
 }
 
+interface QuestionRepliedStatus {
+  correctAlternativeId: string;
+  replyCorrect: boolean;
+}
+
 export function QuestionWrapper({ id, alternatives, children }: QuestionWrapperProps) {
-  // eslint-disable-next-line prettier/prettier
   const [alternativeSelected, setAlternativeSelected] = useState<AlternativeEntity | null>(null);
+  const [questionRepliedStatus, setQuestionRepliedStatus] = useState<QuestionRepliedStatus>();
+  const [isLoadingValidation, setLoadingValidation] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const { isOpen, openModal, closeModal } = useModal();
+
+  const handleValidateAnswer = async () => {
+    setLoadingValidation(true);
+    try {
+      const { data } = await axiosReq.post<QuestionRepliedStatus>(`/question/${id}/validateReply`, {
+        alternativeId: alternativeSelected?.id,
+      });
+      setQuestionRepliedStatus(data);
+      setShowAnswer(true);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingValidation(false);
+    }
+  };
 
   const handleShowAnswer = () => {
     openModal();
@@ -52,13 +74,17 @@ export function QuestionWrapper({ id, alternatives, children }: QuestionWrapperP
         <ButtonComponent
           label="Confirmar"
           className="w-full sm:w-auto"
-          disable={!alternativeSelected}
-          onClick={handleShowAnswer}
+          disable={!alternativeSelected || isLoadingValidation}
+          onClick={handleValidateAnswer}
         />
         {showAnswer && (
-          <div className="mt-5 sm:mt-0 sm:ml-5 w-full sm:w-auto bg-red opacity-80 p-4 rounded flex items-center justify-center">
+          <div
+            className={`mt-5 sm:mt-0 sm:ml-5 w-full sm:w-auto ${questionRepliedStatus?.replyCorrect ? 'bg-green-500' : 'bg-red '} opacity-80 p-4 rounded flex items-center justify-center`}
+          >
             <span className="font-bold text-center text-white">
-              Você errou! Resposta correta: A
+              {questionRepliedStatus?.replyCorrect
+                ? 'Você acertou'
+                : `Você errou! Resposta correta: A`}
             </span>
           </div>
         )}
