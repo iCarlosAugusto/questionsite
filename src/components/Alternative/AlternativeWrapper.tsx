@@ -19,15 +19,13 @@ export function AlternativeWrapper({
 
   return (
     <div
-      className="flex flex-row items-center mt-5 cursor-pointer p-5 hover:bg-slate-800 opacity-90 rounded-3xl"
+      className="flex flex-row items-center mt-5 cursor-pointer p-5 hover:bg-slate-200 dark:hover:bg-slate-800 opacity-90 rounded-3xl"
       onClick={pickAlternative}
     >
       <div
-        className={`p-5 h-5 w-5 flex justify-center border items-center rounded-full ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-none'}`}
+        className={`p-5 h-5 w-5 flex justify-center border-2 items-center rounded-full ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-none'}`}
       >
-        <span
-          className={`font-bold ${isSelected ? 'text-white' : 'text-slate-300'}`}
-        >
+        <span className={`font-bold ${isSelected ? 'text-white' : 'text-slate-300'}`}>
           {alternativeLetter}
         </span>
       </div>
