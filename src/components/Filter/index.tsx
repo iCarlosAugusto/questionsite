@@ -12,7 +12,7 @@ import { axiosReq } from '@/http/axios_helper';
 
 import { DragCloseDrawer } from '../Bottomsheet';
 import ButtonComponent from '../Button';
-import ChipComponent from '../Chip';
+import { Chip } from '../Chip';
 import { Select } from '../Select';
 import { SelectSection } from '../SelectSection';
 
@@ -93,29 +93,29 @@ export function Filter() {
         <div className="mx-auto max-w-2xl space-y-4 text-neutral-400">
           <div className="mt-2">
             <div>
-              <ChipComponent
+              <Chip
                 label="Todas"
-                isSeleced={currentQuestionType === 'all'}
+                isSelected={currentQuestionType === 'all'}
                 onClick={() => changePage('all')}
               />
-              <ChipComponent
+              <Chip
                 label="Resolvidas"
-                isSeleced={currentQuestionType === 'resolved'}
+                isSelected={currentQuestionType === 'resolved'}
                 onClick={() => changePage('resolved')}
               />
-              <ChipComponent
+              <Chip
                 label="Não resolvidas"
-                isSeleced={currentQuestionType === 'notResolved'}
+                isSelected={currentQuestionType === 'notResolved'}
                 onClick={() => changePage('notResolved')}
               />
-              <ChipComponent
+              <Chip
                 label="Acertei"
-                isSeleced={currentQuestionType === 'correct'}
+                isSelected={currentQuestionType === 'correct'}
                 onClick={() => changePage('correct')}
               />
-              <ChipComponent
+              <Chip
                 label="Errei"
-                isSeleced={currentQuestionType === 'wrong'}
+                isSelected={currentQuestionType === 'wrong'}
                 onClick={() => changePage('wrong')}
               />
             </div>
@@ -175,29 +175,29 @@ export function Filter() {
         </div>
 
         <div className="hidden sm:block">
-          <ChipComponent
+          <Chip
             label="Todas"
-            isSeleced={currentQuestionType === 'all'}
+            isSelected={currentQuestionType === 'all'}
             onClick={() => changePage('all')}
           />
-          <ChipComponent
+          <Chip
             label="Resolvidas"
-            isSeleced={currentQuestionType === 'resolved'}
+            isSelected={currentQuestionType === 'resolved'}
             onClick={() => changePage('resolved')}
           />
-          <ChipComponent
+          <Chip
             label="Não resolvidas"
-            isSeleced={currentQuestionType === 'notResolved'}
+            isSelected={currentQuestionType === 'notResolved'}
             onClick={() => changePage('notResolved')}
           />
-          <ChipComponent
+          <Chip
             label="Acertei"
-            isSeleced={currentQuestionType === 'correct'}
+            isSelected={currentQuestionType === 'correct'}
             onClick={() => changePage('correct')}
           />
-          <ChipComponent
+          <Chip
             label="Errei"
-            isSeleced={currentQuestionType === 'wrong'}
+            isSelected={currentQuestionType === 'wrong'}
             onClick={() => changePage('wrong')}
           />
         </div>

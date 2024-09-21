@@ -1,25 +1,19 @@
 import React from 'react';
 
-import { Chip } from '@nextui-org/react';
-
 interface ChipProps {
   label: string;
-  isSeleced?: boolean;
+  isSelected?: boolean;
   onClick?: () => void;
 }
 
-export default function ChipComponent({
-  label,
-  isSeleced = false,
-  onClick,
-}: ChipProps) {
+export function Chip({ label, isSelected = false, onClick }: ChipProps) {
   return (
-    <Chip
-      className="mx-1 cursor-pointer"
+    <div
+      className={`rounded-3xl px-5 py-2 inline mx-1 cursor-pointer 
+      ${isSelected ? 'bg-blue-500' : 'bg-slate-200 dark:bg-slate-800'}`}
       onClick={onClick}
-      color={isSeleced ? 'primary' : 'default'}
     >
-      {label}
-    </Chip>
+      <span>{label}</span>
+    </div>
   );
 }
