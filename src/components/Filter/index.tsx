@@ -129,7 +129,6 @@ export function Filter() {
           <ButtonComponent label="Limpar" className="w-full" />
         </div>
       </DragCloseDrawer>
-      <span>Minhas questões</span>
 
       <div className="mt-2">
         <div className="flex mb-5 space-x-100 relative h-50">

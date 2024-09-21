@@ -31,7 +31,7 @@ export default async function Question({ params, searchParams }: QuestionProps) 
 
   return (
     <DefaultLayout showSidebar={true}>
-      <h1 className="text-4xl font-bold ">AWS Questions</h1>
+      <h1 className="text-4xl font-bold">Questões de OAB</h1>
       <span>Foram encontradas {data.totalElements} questões</span>
       <Filter />
 
