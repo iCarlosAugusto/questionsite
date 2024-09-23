@@ -16,9 +16,10 @@ interface Option {
 interface SelectSectionProps {
   placeholder: string;
   sections: Section[] | undefined;
+  isDisable?: boolean;
 }
 
-export function SelectSection({ sections, placeholder }: SelectSectionProps) {
+export function SelectSection({ sections, placeholder, isDisable = false }: SelectSectionProps) {
   const [isOpen, setOpen] = useState(false);
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -51,7 +52,7 @@ export function SelectSection({ sections, placeholder }: SelectSectionProps) {
           <div
             className="bg-slate-300 p-3 w-40 rounded"
             onClick={() => {
-              setOpen((oldState) => !oldState);
+              isDisable ? null : setOpen((oldState) => !oldState);
             }}
           >
             <span className="text-black">{placeholder}</span>

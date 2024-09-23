@@ -37,8 +37,7 @@ export const Pagination = ({ totalPages }: PaginationProps) => {
 
     replace(`${pathname}?${params.toString()}`);
   };
-  console.log('Current page antes de renderizar: ', currentPage);
-  console.log('page: ', searchParams.get('page'));
+
   return (
     <div className="flex items-center justify-center space-x-2">
       {/* Botão Voltar */}

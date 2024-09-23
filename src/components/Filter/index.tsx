@@ -16,6 +16,16 @@ import { Chip } from '../Chip';
 import { Select } from '../Select';
 import { SelectSection } from '../SelectSection';
 
+interface Section {
+  title: string;
+  options: Option[];
+}
+
+interface Option {
+  label: string;
+  value: string;
+}
+
 export function Filter() {
   const { replace, refresh } = useRouter();
   const pathname = usePathname();
@@ -68,16 +78,41 @@ export function Filter() {
   };
 
   const getSubjects = async () => {
-    setLoadingSubjects(true);
-    try {
-      const { data } = await axiosReq.get<Subject[]>('/subject');
-      setSubjects(data);
-    } catch (error) {
-      console.log('erro');
-    } finally {
-      setLoadingSubjects(false);
+    const disciplinesSelected = searchParams.get('disciplines')?.split('%');
+    const arrSubjects: Subject[] = [];
+
+    for (const index in disciplinesSelected) {
+      const currentDisciplineId = disciplinesSelected[Number(index)];
+      const { data } = await axiosReq.get<Subject[]>(`/discipline/${currentDisciplineId}/subject`);
+      arrSubjects.push(...data);
     }
+
+    setSubjects(arrSubjects);
   };
+
+  const sections = subjects.reduce((acc: Section[], item) => {
+    const disciplineName = item.disciplines.name;
+
+    // Verifica se a disciplina já existe na lista
+    let section = acc.find((s) => s.title === disciplineName);
+
+    if (!section) {
+      // Se não existe, cria um novo grupo de opções para a disciplina
+      section = {
+        title: disciplineName,
+        options: [],
+      };
+      acc.push(section);
+    }
+
+    // Adiciona a opção ao grupo
+    section.options.push({
+      label: item.name,
+      value: String(item.id),
+    });
+
+    return acc;
+  }, []);
 
   useEffect(() => {
     getDiscipliens();
@@ -85,7 +120,8 @@ export function Filter() {
 
   useEffect(() => {
     getSubjects();
-  }, [disciplines]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams.get('disciplines')]);
 
   return (
     <>
@@ -143,33 +179,8 @@ export function Filter() {
           />
           <SelectSection
             placeholder="Matérias"
-            sections={[
-              {
-                title: 'Direito constitucional',
-                options: [
-                  {
-                    label: 'Artigo 1',
-                    value: '1',
-                  },
-                  {
-                    label: 'Artigo 2',
-                    value: '2',
-                  },
-                  {
-                    label: 'Artigo 3',
-                    value: '3',
-                  },
-                  {
-                    label: 'Artigo 4',
-                    value: '4',
-                  },
-                  {
-                    label: 'Artigo 5',
-                    value: '5',
-                  },
-                ],
-              },
-            ]}
+            sections={sections}
+            isDisable={searchParams.get('disciplines') === null}
           />
         </div>
 
