@@ -9,10 +9,7 @@ interface DefaultLayoutProps {
   showSidebar?: boolean;
 }
 
-export default function DefaultLayout({
-  children,
-  showSidebar = true,
-}: DefaultLayoutProps) {
+export default function DefaultLayout({ children, showSidebar = true }: DefaultLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   console.log(showSidebar);
   return (
@@ -36,9 +33,7 @@ export default function DefaultLayout({
 
           {/* <!-- ===== Main Content Start ===== --> */}
           <main>
-            <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-              {children}
-            </div>
+            <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">{children}</div>
           </main>
           {/* <!-- ===== Main Content End ===== --> */}
         </div>
