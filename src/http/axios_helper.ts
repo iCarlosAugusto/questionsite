@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosReq = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'https://oabquestion-api.onrender.com',
 });
 
 export { axiosReq };
