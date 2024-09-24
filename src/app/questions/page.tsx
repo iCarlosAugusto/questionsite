@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Filter } from '@/components/Filter';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
@@ -53,13 +53,26 @@ export default async function Question({ searchParams }: QuestionProps) {
       <h1 className="text-4xl font-bold">Questões de OAB</h1>
       <span>Foram encontradas {data.totalElements} questões</span>
       <Filter />
+      {questions.length > 0 && (
+        <Fragment>
+          {questions.map((currentQuestion, index) => (
+            <QuestionWrapper {...currentQuestion} key={index}>
+              <QuestionLabel label={currentQuestion.text} key={index} />
+            </QuestionWrapper>
+          ))}
+          <Pagination totalPages={data.totalPages} />
+        </Fragment>
+      )}
 
-      {questions.map((currentQuestion, index) => (
-        <QuestionWrapper {...currentQuestion} key={index}>
-          <QuestionLabel label={currentQuestion.text} key={index} />
-        </QuestionWrapper>
-      ))}
-      <Pagination totalPages={data.totalPages} />
+      {questions.length === 0 && (
+        <div className="flex  items-center justify-center mt-10">
+          <span className="text-center">
+            Não conseguimos encontrar nenhuma questão =(
+            <br />
+            Tente trocar os filtros
+          </span>
+        </div>
+      )}
     </DefaultLayout>
   );
 }
