@@ -20,13 +20,32 @@ interface QuestionProps {
   params: object;
   searchParams: {
     page: string;
-    disciplinesId: string;
+    disciplines: string;
+    subjects: string;
   };
 }
 
-export default async function Question({ params, searchParams }: QuestionProps) {
-  const currentPage = searchParams.page ? Number(searchParams.page) - 1 : 0;
-  const { data } = await axiosReq.get<Pagable<QuestionEntity>>(`/question?page=${currentPage}`);
+export default async function Question({ searchParams }: QuestionProps) {
+  const buildQueryString = (): string => {
+    const currentPage = searchParams.page ? Number(searchParams.page) - 1 : 0;
+
+    const queryParams = {
+      page: currentPage,
+      disciplines: searchParams.disciplines,
+      subjects: searchParams.subjects,
+    };
+
+    const queryString = Object.entries(queryParams)
+      // eslint-disable-next-line no-unused-vars
+      .filter(([_, value]) => value !== undefined && value !== null)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&')
+      .replaceAll('%', '%25');
+
+    return `/question?${queryString}`;
+  };
+
+  const { data } = await axiosReq.get<Pagable<QuestionEntity>>(buildQueryString());
   const questions = data.content;
 
   return (
