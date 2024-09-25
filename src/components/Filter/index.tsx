@@ -170,61 +170,16 @@ export function Filter() {
         <div className="flex mb-5 space-x-5">
           <SelectComponent
             placerholder="Disciplinas"
-            options={[
-              {
-                label: 'Direito Penal',
-                value: '1',
-              },
-              {
-                label: 'Direito Civil',
-                value: '2',
-              },
-              {
-                label: 'Direito Constitucional',
-                value: '3',
-              },
-              {
-                label: 'Direito Empresarial',
-                value: '4',
-              },
-            ]}
-            // options={disciplines?.map((el) => {
-            //   return {
-            //     label: el.name,
-            //     value: el.id,
-            //   } as Option;
-            // })}
+            options={disciplines?.map((el) => {
+              return {
+                label: el.name,
+                value: el.id,
+              } as Option;
+            })}
           />
           <SelectSectionComponent
             placeholder="Matérias"
-            sections={[
-              {
-                title: 'Titulo 1',
-                options: [
-                  {
-                    label: 'Materia 1',
-                    value: '1',
-                  },
-                  {
-                    label: 'Materia 2',
-                    value: '2',
-                  },
-                ],
-              },
-              {
-                title: 'Titulo 2',
-                options: [
-                  {
-                    label: 'Materia 3',
-                    value: '3',
-                  },
-                  {
-                    label: 'Materia 4',
-                    value: '4',
-                  },
-                ],
-              },
-            ]}
+            sections={sections}
             isDisable={searchParams.get('disciplines') === null}
           />
         </div>

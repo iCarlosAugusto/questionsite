@@ -38,8 +38,8 @@ export function SelectComponent({ options, placerholder }: SelectProps) {
         className="max-w-xs"
         onChange={(el) => handleSelectOption(el.target.value)}
       >
-        {options.map((el, index) => (
-          <SelectItem key={index}>{el.label}</SelectItem>
+        {options.map((el) => (
+          <SelectItem key={el.value}>{el.label}</SelectItem>
         ))}
       </Select>
     </>
