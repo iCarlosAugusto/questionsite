@@ -56,7 +56,7 @@ export default async function Question({ searchParams }: QuestionProps) {
       {questions.length > 0 && (
         <Fragment>
           {questions.map((currentQuestion, index) => (
-            <QuestionWrapper {...currentQuestion} key={index}>
+            <QuestionWrapper question={currentQuestion} key={index}>
               <QuestionLabel label={currentQuestion.text} key={index} />
             </QuestionWrapper>
           ))}

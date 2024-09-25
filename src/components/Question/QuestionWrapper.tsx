@@ -3,6 +3,7 @@
 import React, { ReactNode, useState } from 'react';
 
 import { AlternativeEntity } from '@/entities/AlternativeEntity';
+import { QuestionEntity } from '@/entities/QuestionEntity';
 import useModal from '@/hooks/useModal';
 import { axiosReq } from '@/http/axios_helper';
 
@@ -12,8 +13,7 @@ import ButtonComponent from '../Button';
 import Modal from '../Modal';
 
 interface QuestionWrapperProps {
-  id: string;
-  alternatives: AlternativeEntity[];
+  question: QuestionEntity;
   children: ReactNode;
 }
 
@@ -22,12 +22,14 @@ interface QuestionRepliedStatus {
   replyCorrect: boolean;
 }
 
-export function QuestionWrapper({ id, alternatives, children }: QuestionWrapperProps) {
+export function QuestionWrapper({ question, children }: QuestionWrapperProps) {
   const [alternativeSelected, setAlternativeSelected] = useState<AlternativeEntity | null>(null);
   const [questionRepliedStatus, setQuestionRepliedStatus] = useState<QuestionRepliedStatus>();
   const [isLoadingValidation, setLoadingValidation] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const { isOpen, closeModal } = useModal();
+
+  const { id, alternatives, discipline, subject } = question;
 
   const handleValidateAnswer = async () => {
     setLoadingValidation(true);
@@ -55,7 +57,9 @@ export function QuestionWrapper({ id, alternatives, children }: QuestionWrapperP
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8 mt-5 mb-5">
-      <span>Q-{id} | AWS</span>
+      <span className="font-bold">
+        {discipline.name} - {subject.name}
+      </span>
       {isOpen && <Modal isOpen={isOpen} closeModal={closeModal} />}
       {children}
       {alternatives.map((currentAlternative, index) => (
