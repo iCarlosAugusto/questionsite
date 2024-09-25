@@ -63,10 +63,11 @@ export function Filter() {
   const [disciplines, setDisciplines] = useState<Discipline[]>([]);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [isLoadingDisciplines, setLoadingDisciplines] = useState(false);
-  const [isLoadingSubjects, setLoadingSubjects] = useState(false);
+  //const [isLoadingSubjects, setLoadingSubjects] = useState(false);
 
   const getDiscipliens = async () => {
     setLoadingDisciplines(true);
+    isLoadingDisciplines;
     try {
       const { data } = await axiosReq.get<Discipline[]>('/discipline');
       setDisciplines(data);

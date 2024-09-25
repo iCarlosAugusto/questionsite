@@ -27,7 +27,7 @@ export function QuestionWrapper({ id, alternatives, children }: QuestionWrapperP
   const [questionRepliedStatus, setQuestionRepliedStatus] = useState<QuestionRepliedStatus>();
   const [isLoadingValidation, setLoadingValidation] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, closeModal } = useModal();
 
   const handleValidateAnswer = async () => {
     setLoadingValidation(true);
@@ -44,10 +44,10 @@ export function QuestionWrapper({ id, alternatives, children }: QuestionWrapperP
     }
   };
 
-  const handleShowAnswer = () => {
-    openModal();
-    setShowAnswer(true);
-  };
+  // const handleShowAnswer = () => {
+  //   openModal();
+  //   setShowAnswer(true);
+  // };
 
   const pickAlternative = (alternative: AlternativeEntity) => {
     setAlternativeSelected(alternative);
