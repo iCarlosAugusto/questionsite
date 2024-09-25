@@ -82,20 +82,16 @@ export default async function ECommerce() {
           <span className="text-3xl">Boas vindas! Vamos estudar?</span>
           <div className="flex justify-between">
             <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
-              porro doloribus laboriosam minus nam quisquam labore numquam
-              voluptas ratione sed, praesentium minima quae ut voluptatum quos
-              obcaecati aperiam fugit facilis!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem porro doloribus
+              laboriosam minus nam quisquam labore numquam voluptas ratione sed, praesentium minima
+              quae ut voluptatum quos obcaecati aperiam fugit facilis!
             </span>
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:space-x-5 mt-5">
           <Link href={'/library/Java'}>
-            <ButtonComponent
-              label="Continuar de onde parei"
-              className="w-full sm:w-auto"
-            />
+            <ButtonComponent label="Continuar de onde parei" className="w-full sm:w-auto" />
           </Link>
 
           <Link href={'/library/Java'}>
@@ -108,9 +104,7 @@ export default async function ECommerce() {
       </div>
 
       <div className="flex flex-col items-center justify-center mt-15">
-        <span className="text-4xl text-center">
-          Explore os mais 15 cursos disponveis
-        </span>
+        <span className="text-4xl text-center">Explore os mais 15 cursos disponveis</span>
 
         <div className="grid grid-cols-2 sm:flex mt-5">
           {[

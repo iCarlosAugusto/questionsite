@@ -13,9 +13,7 @@ const useColorMode = () => {
     } else {
       window.document.body.style.backgroundColor = '#f1f5f9';
     }
-    colorMode === 'dark'
-      ? bodyClass.add(className)
-      : bodyClass.remove(className);
+    colorMode === 'dark' ? bodyClass.add(className) : bodyClass.remove(className);
   }, [colorMode]);
 
   return [colorMode, setColorMode];

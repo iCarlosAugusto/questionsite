@@ -9,14 +9,9 @@ const DropdownUser = () => {
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
-      <div
-        onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="flex items-center gap-4"
-      >
+      <div onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-4">
         <span className="hidden text-right lg:block">
-          <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
-          </span>
+          <span className="block text-sm font-medium text-black dark:text-white">Thomas Anree</span>
           <span className="block text-xs">UX Designer</span>
         </span>
 

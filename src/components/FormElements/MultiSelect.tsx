@@ -82,12 +82,7 @@ const MultiSelect: React.FC<DropdownProps> = ({ id }) => {
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdownRef.current) return;
-      if (
-        !show ||
-        dropdownRef.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!show || dropdownRef.current.contains(target) || trigger.current.contains(target)) return;
       setShow(false);
     };
     document.addEventListener('click', clickHandler);
@@ -119,9 +114,7 @@ const MultiSelect: React.FC<DropdownProps> = ({ id }) => {
                         key={index}
                         className="my-1.5 flex items-center justify-center rounded border-[.5px] border-stroke bg-gray px-2.5 py-1.5 text-sm font-medium dark:border-strokedark dark:bg-white/30"
                       >
-                        <div className="max-w-full flex-initial">
-                          {options[index].text}
-                        </div>
+                        <div className="max-w-full flex-initial">{options[index].text}</div>
                         <div className="flex flex-auto flex-row-reverse">
                           <div
                             onClick={() => remove(index)}
@@ -205,9 +198,7 @@ const MultiSelect: React.FC<DropdownProps> = ({ id }) => {
                             }`}
                           >
                             <div className="flex w-full items-center">
-                              <div className="mx-2 leading-6">
-                                {option.text}
-                              </div>
+                              <div className="mx-2 leading-6">{option.text}</div>
                             </div>
                           </div>
                         </div>

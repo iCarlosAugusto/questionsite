@@ -1,12 +1,7 @@
 import React, { ReactNode } from 'react';
 import useMeasure from 'react-use-measure';
 
-import {
-  useDragControls,
-  useMotionValue,
-  useAnimate,
-  motion,
-} from 'framer-motion';
+import { useDragControls, useMotionValue, useAnimate, motion } from 'framer-motion';
 
 interface DragCloseDrawerProps {
   open: boolean;
@@ -14,11 +9,7 @@ interface DragCloseDrawerProps {
   children: ReactNode;
 }
 
-export const DragCloseDrawer = ({
-  open,
-  setOpen,
-  children,
-}: DragCloseDrawerProps) => {
+export const DragCloseDrawer = ({ open, setOpen, children }: DragCloseDrawerProps) => {
   const [scope, animate] = useAnimate();
   const [drawerRef, { height }] = useMeasure();
 
@@ -85,9 +76,7 @@ export const DragCloseDrawer = ({
                 className="h-2 w-14 cursor-grab touch-none rounded-full bg-neutral-700 active:cursor-grabbing"
               ></button>
             </div>
-            <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">
-              {children}
-            </div>
+            <div className="relative z-0 h-full overflow-y-scroll p-4 pt-12">{children}</div>
           </motion.div>
         </motion.div>
       )}

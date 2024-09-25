@@ -5,10 +5,7 @@ const CheckboxThree = () => {
 
   return (
     <div>
-      <label
-        htmlFor="checkboxLabelThree"
-        className="flex cursor-pointer select-none items-center"
-      >
+      <label htmlFor="checkboxLabelThree" className="flex cursor-pointer select-none items-center">
         <div className="relative">
           <input
             type="checkbox"
@@ -23,11 +20,7 @@ const CheckboxThree = () => {
               isChecked && 'border-primary bg-gray dark:bg-transparent'
             }`}
           >
-            <span
-              className={`text-primary opacity-0 ${
-                isChecked && '!opacity-100'
-              }`}
-            >
+            <span className={`text-primary opacity-0 ${isChecked && '!opacity-100'}`}>
               <svg
                 className="h-3.5 w-3.5 stroke-current"
                 fill="none"

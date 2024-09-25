@@ -43,24 +43,18 @@ const TableThree = () => {
               <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
                 Status
               </th>
-              <th className="px-4 py-4 font-medium text-black dark:text-white">
-                Actions
-              </th>
+              <th className="px-4 py-4 font-medium text-black dark:text-white">Actions</th>
             </tr>
           </thead>
           <tbody>
             {packageData.map((packageItem, key) => (
               <tr key={key}>
                 <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
-                  <h5 className="font-medium text-black dark:text-white">
-                    {packageItem.name}
-                  </h5>
+                  <h5 className="font-medium text-black dark:text-white">{packageItem.name}</h5>
                   <p className="text-sm">${packageItem.price}</p>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                  <p className="text-black dark:text-white">
-                    {packageItem.invoiceDate}
-                  </p>
+                  <p className="text-black dark:text-white">{packageItem.invoiceDate}</p>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                   <p

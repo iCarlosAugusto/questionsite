@@ -5,14 +5,8 @@ import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import Course from '../components/Course';
 import { getSubjectCategoryById } from '../server-actions/getCourses';
 
-export default async function Library({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const subjectCategory = await getSubjectCategoryById(
-    '668f1e74f6941242765096e1',
-  );
+export default async function Library({ params }: { params: { slug: string } }) {
+  const subjectCategory = await getSubjectCategoryById('668f1e74f6941242765096e1');
   return (
     <div>
       <DefaultLayout showSidebar={true}>
