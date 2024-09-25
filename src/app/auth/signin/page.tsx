@@ -221,6 +221,7 @@ const SignIn = () => {
                   labelText="Email"
                   type="email"
                   textError={formErrors.email}
+                  className="w-full mt-5"
                 />
 
                 <Textfield
@@ -229,6 +230,7 @@ const SignIn = () => {
                   labelText="Senha"
                   type="password"
                   textError={formErrors.password}
+                  className="w-full mt-5 mb-5"
                 />
                 <span className="cursor-pointer" onClick={handleForgotPassword}>
                   Esqueci minha senha

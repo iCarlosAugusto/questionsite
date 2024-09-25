@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { Button } from '@nextui-org/react';
+
 interface ButtonProps {
   label: string;
   onClick?: () => void;
@@ -18,13 +20,13 @@ export default function ButtonComponent({
   onClick,
 }: ButtonProps) {
   return (
-    <button
-      className={`flex flex-wrap gap-5 xl:gap-20 ${className} ${disable ? 'opacity-50' : 'opacity-100'} ${className} inline-flex items-center justify-center rounded-md bg-meta-3 px-10 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10`}
+    <Button
       disabled={disable}
       type={type}
       onClick={() => (disable == true ? null : onClick?.())}
+      className={className}
     >
       {label}
-    </button>
+    </Button>
   );
 }
