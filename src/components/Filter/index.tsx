@@ -48,7 +48,12 @@ export function Filter() {
 
   const handleCleanFilters = () => {
     const params = new URLSearchParams(searchParams);
+    params.delete('disciplines');
+    params.delete('subjects');
     params.delete('questionType');
+    replace(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
   };
 
   const handleFilter = () => {
@@ -242,7 +247,7 @@ export function Filter() {
             label="Limpar"
             onClick={handleCleanFilters}
             className="hidden sm:block"
-            disable={!currentQuestionType}
+            //disable={!currentQuestionType}
           />
         </div>
       </div>
