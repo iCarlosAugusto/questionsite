@@ -67,7 +67,7 @@ export function QuestionWrapper({ question, children }: QuestionWrapperProps) {
           <AlternativeWrapper
             {...currentAlternative}
             isSelected={currentAlternative.id === alternativeSelected?.id}
-            alternativeLetter="A"
+            alternativeLetter={currentAlternative.alternativeLetter}
           >
             <AlternativeLabel label={currentAlternative.text} />
           </AlternativeWrapper>

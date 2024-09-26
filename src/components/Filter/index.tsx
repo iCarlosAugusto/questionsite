@@ -42,8 +42,8 @@ export function Filter() {
     } else {
       params.delete('questionType');
     }
-
-    replace(`${pathname}?${params.toString()}`);
+    window.history.pushState(null, '', `${pathname}?${params.toString()}`);
+    //replace(`${pathname}?${params.toString()}`);
   };
 
   const handleCleanFilters = () => {
@@ -123,6 +123,8 @@ export function Filter() {
     getSubjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams.get('disciplines')]);
+
+  console.log('restarted');
 
   return (
     <>

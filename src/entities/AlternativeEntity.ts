@@ -3,4 +3,5 @@ export interface AlternativeEntity {
   questionId: string;
   text: string;
   isCorrect: boolean;
+  alternativeLetter: string;
 }
