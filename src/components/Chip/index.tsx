@@ -9,7 +9,7 @@ interface ChipProps {
 export function Chip({ label, isSelected = false, onClick }: ChipProps) {
   return (
     <div
-      className={`rounded-3xl px-5 py-2 inline mx-1 cursor-pointer 
+      className={`rounded-3xl px-3 py-2 inline cursor-pointer 
       ${isSelected ? 'bg-blue-500' : 'bg-slate-200 dark:bg-slate-800'}`}
       onClick={onClick}
     >

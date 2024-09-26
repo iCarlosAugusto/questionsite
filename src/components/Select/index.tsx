@@ -30,18 +30,18 @@ export function SelectComponent({ options, placerholder }: SelectProps) {
   const disciplinesSelected = searchParams.get('disciplines')?.split('%');
 
   return (
-    <>
-      <Select
-        label={placerholder}
-        selectionMode="multiple"
-        selectedKeys={disciplinesSelected ?? []}
-        className="max-w-xs"
-        onChange={(el) => handleSelectOption(el.target.value)}
-      >
-        {options.map((el) => (
-          <SelectItem key={el.value}>{el.label}</SelectItem>
-        ))}
-      </Select>
-    </>
+    <Select
+      label={placerholder}
+      selectionMode="multiple"
+      selectedKeys={disciplinesSelected ?? []}
+      className="max-w-xs"
+      onChange={(el) => handleSelectOption(el.target.value)}
+    >
+      {options.map((el) => (
+        <SelectItem key={el.value} className="z-999999">
+          {el.label}
+        </SelectItem>
+      ))}
+    </Select>
   );
 }

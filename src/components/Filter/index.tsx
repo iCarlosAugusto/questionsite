@@ -127,9 +127,23 @@ export function Filter() {
   return (
     <>
       <DragCloseDrawer open={isOpen} setOpen={closeModal}>
-        <div className="mx-auto max-w-2xl space-y-4 text-neutral-400">
-          <div className="mt-2">
-            <div>
+        <div className="space-y-5">
+          <div className="mx-auto max-w-2xl space-y-4 text-neutral-400">
+            <SelectComponent
+              placerholder="Disciplinas"
+              options={disciplines?.map((el) => {
+                return {
+                  label: el.name,
+                  value: el.id,
+                } as Option;
+              })}
+            />
+            <SelectSectionComponent
+              placeholder="Matérias"
+              sections={sections}
+              isDisable={searchParams.get('disciplines') === null}
+            />
+            <div className="flex flex-wrap">
               <Chip
                 label="Todas"
                 isSelected={currentQuestionType === 'all'}
@@ -168,7 +182,7 @@ export function Filter() {
       </DragCloseDrawer>
 
       <div className="mt-2">
-        <div className="flex mb-5 space-x-5">
+        <div className="hidden sm:flex mb-5 space-x-5">
           <SelectComponent
             placerholder="Disciplinas"
             options={disciplines?.map((el) => {
