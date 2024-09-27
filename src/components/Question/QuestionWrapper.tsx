@@ -4,13 +4,13 @@ import React, { ReactNode, useState } from 'react';
 
 import { AlternativeEntity } from '@/entities/AlternativeEntity';
 import { QuestionEntity } from '@/entities/QuestionEntity';
-import useModal from '@/hooks/useModal';
 import { axiosReq } from '@/http/axios_helper';
+import { useDisclosure } from '@nextui-org/react';
 
 import { AlternativeLabel } from '../Alternative';
 import { AlternativeWrapper } from '../Alternative/AlternativeWrapper';
 import ButtonComponent from '../Button';
-import Modal from '../Modal';
+import { ModalAuth } from '../ModalAuth';
 
 interface QuestionWrapperProps {
   question: QuestionEntity;
@@ -27,7 +27,8 @@ export function QuestionWrapper({ question, children }: QuestionWrapperProps) {
   const [questionRepliedStatus, setQuestionRepliedStatus] = useState<QuestionRepliedStatus>();
   const [isLoadingValidation, setLoadingValidation] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
-  const { isOpen, closeModal } = useModal();
+  //const { isOpen, closeModal } = useModal();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const { id, alternatives, discipline, subject } = question;
 
@@ -46,10 +47,11 @@ export function QuestionWrapper({ question, children }: QuestionWrapperProps) {
     }
   };
 
-  // const handleShowAnswer = () => {
-  //   openModal();
-  //   setShowAnswer(true);
-  // };
+  const handleShowAnswer = () => {
+    onOpen();
+    handleValidateAnswer();
+    //setShowAnswer(true);
+  };
 
   const pickAlternative = (alternative: AlternativeEntity) => {
     setAlternativeSelected(alternative);
@@ -60,7 +62,7 @@ export function QuestionWrapper({ question, children }: QuestionWrapperProps) {
       <span className="font-bold">
         {discipline.name} - {subject.name}
       </span>
-      {isOpen && <Modal isOpen={isOpen} closeModal={closeModal} />}
+      <ModalAuth isOpen={isOpen} onOpenChange={onOpenChange} />
       {children}
       {alternatives.map((currentAlternative, index) => (
         <div onClick={() => pickAlternative(currentAlternative)} key={index}>
@@ -79,7 +81,7 @@ export function QuestionWrapper({ question, children }: QuestionWrapperProps) {
           label="Confirmar"
           className="w-full sm:w-auto"
           disable={!alternativeSelected || isLoadingValidation}
-          onClick={handleValidateAnswer}
+          onClick={handleShowAnswer}
         />
         {showAnswer && (
           <div

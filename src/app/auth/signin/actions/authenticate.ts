@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-export const authServerAction = async () => {
+export const createAccountServerAction = async () => {
   console.log('Auth...');
   revalidatePath('/');
   return {
