@@ -10,7 +10,7 @@ import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import { Textfield } from '@/components/Textfield';
 import { z } from 'zod';
 
-import { authServerAction } from '../signin/actions/authenticate';
+import { createAccountServerAction } from '../signin/actions/authenticate';
 
 // export const metadata: Metadata = {
 //   title: 'Next.js SignIn Page | TailAdmin - Next.js Dashboard Template',
@@ -24,7 +24,7 @@ interface FormErrors {
 }
 
 const Signup = () => {
-  const [formState, formAction] = useFormState(authServerAction, {
+  const [formState, formAction] = useFormState(createAccountServerAction, {
     message: '',
     errors: null,
     fieldValues: {},
