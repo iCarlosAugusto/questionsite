@@ -206,7 +206,7 @@ export function Filter() {
           />
         </div>
 
-        <div className="hidden sm:block">
+        <div className="hidden sm:block space-x-2">
           <Chip
             label="Todas"
             isSelected={currentQuestionType === 'all'}
@@ -235,7 +235,11 @@ export function Filter() {
         </div>
         <div className="mt-5 space-x-5 flex">
           <ButtonComponent
-            label="Filtrar"
+            label={
+              deviceType === DeviceType.MOBILE || deviceType === DeviceType.TABLET
+                ? 'Filtros'
+                : 'Filtrar'
+            }
             onClick={() => {
               deviceType === DeviceType.MOBILE || deviceType === DeviceType.TABLET
                 ? openModal()

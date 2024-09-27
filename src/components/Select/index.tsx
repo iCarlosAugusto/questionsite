@@ -34,7 +34,7 @@ export function SelectComponent({ options, placerholder }: SelectProps) {
       label={placerholder}
       selectionMode="multiple"
       selectedKeys={disciplinesSelected ?? []}
-      className="max-w-xs"
+      className="w-full sm:max-w-xs"
       onChange={(el) => handleSelectOption(el.target.value)}
     >
       {options.map((el) => (

@@ -20,7 +20,7 @@ export default function RootLayout({
   }, []);
 
   return (
-    <html lang="en">
+    <html lang="en" className="bg-whiten">
       <body suppressHydrationWarning={true}>
         <NextUIProvider>
           <div className="dark:bg-boxdark-2 dark:text-bodydark">

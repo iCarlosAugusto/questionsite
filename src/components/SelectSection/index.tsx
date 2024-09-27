@@ -42,7 +42,7 @@ export function SelectSectionComponent({
   return (
     <Select
       label={placeholder}
-      className="max-w-xs"
+      className="w-full sm:max-w-xs"
       selectionMode="multiple"
       isDisabled={isDisable}
       selectedKeys={subjects ?? []}
