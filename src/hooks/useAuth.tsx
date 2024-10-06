@@ -11,9 +11,15 @@ export const useAuth = () => {
     localStorage.removeItem('userLoggedIn');
   };
 
+  const currentUser =
+    localStorage.getItem('userLoggedIn') != null
+      ? (JSON.parse(localStorage.getItem('userLoggedIn')!) as UserEntity)
+      : null;
+
   return {
     isAuthenticated,
     saveUser,
     removeUser,
+    currentUser,
   };
 };
