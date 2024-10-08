@@ -13,14 +13,27 @@ const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { currentUser, isAuthenticated } = useAuth();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
 
   return (
     <>
-      <ModalAuth isOpen={isOpen} onOpenChange={onOpenChange} />
+      <ModalAuth isOpen={isOpen} onOpenChange={onOpenChange} openCreation={isCreatingAccount!} />
       {!isAuthenticated && (
         <div onClick={() => setDropdownOpen(!dropdownOpen)} className="flex items-center gap-4">
-          <ButtonComponent label="Entrar" onClick={onOpen} />
-          <ButtonComponent label="Quero estudar de graça" onClick={onOpen} />
+          <ButtonComponent
+            label="Entrar"
+            onClick={() => {
+              setIsCreatingAccount(true);
+              onOpen();
+            }}
+          />
+          <ButtonComponent
+            label="Quero estudar de graça"
+            onClick={() => {
+              setIsCreatingAccount(false);
+              onOpen();
+            }}
+          />
         </div>
       )}
       {isAuthenticated && (
