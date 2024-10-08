@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useFormState } from 'react-dom';
 
 import ButtonComponent from '@/components/Button';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
@@ -11,8 +10,6 @@ import { ModalPasswordForgotten } from '@/components/ModalPasswordForgotten';
 import { Textfield } from '@/components/Textfield';
 import useModal from '@/hooks/useModal';
 import { z } from 'zod';
-
-import { createAccountServerAction } from './actions/authenticate';
 
 // export const metadata: Metadata = {
 //   title: 'Next.js SignIn Page | TailAdmin - Next.js Dashboard Template',
@@ -25,18 +22,12 @@ interface FormErrors {
 }
 
 const SignIn = () => {
-  const [formState, formAction] = useFormState(createAccountServerAction, {
-    message: '',
-    errors: null,
-    fieldValues: {},
-  });
   const [formErrors, setFormErrors] = useState<FormErrors>({
     email: undefined,
     password: undefined,
   });
 
   const validateForm = (formData: FormData) => {
-    console.log(formState);
     const schema = z.object({
       email: z.string().email('Email inválido'),
       password: z.string().trim().min(1, 'Senha inválida'),
@@ -51,7 +42,7 @@ const SignIn = () => {
       password: validation.error?.formErrors?.fieldErrors?.password?.[0],
     });
     if (validation.success) {
-      formAction();
+      //formAction();
     }
   };
   const { isOpen, openModal, closeModal } = useModal();
