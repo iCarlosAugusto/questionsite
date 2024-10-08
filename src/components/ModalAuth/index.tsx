@@ -21,7 +21,7 @@ export function ModalAuth({ isOpen, onOpenChange, openCreation }: ModalAuthProps
   }, [openCreation]);
 
   return (
-    <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur">
+    <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur" className="z-999999">
       <ModalContent>
         {(onClose) => (
           <>
