@@ -28,6 +28,7 @@ const DropdownUser = () => {
             }}
           />
           <ButtonComponent
+            className="hidden sm:block"
             label="Quero estudar de graça"
             onClick={() => {
               setIsCreatingAccount(false);
