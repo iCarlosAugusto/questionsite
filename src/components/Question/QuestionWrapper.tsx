@@ -4,6 +4,7 @@ import React, { ReactNode, useState } from 'react';
 
 import { AlternativeEntity } from '@/entities/AlternativeEntity';
 import { QuestionEntity } from '@/entities/QuestionEntity';
+import { useAuth } from '@/hooks/useAuth';
 import { axiosReq } from '@/http/axios_helper';
 import { useDisclosure } from '@nextui-org/react';
 
@@ -27,8 +28,8 @@ export function QuestionWrapper({ question, children }: QuestionWrapperProps) {
   const [questionRepliedStatus, setQuestionRepliedStatus] = useState<QuestionRepliedStatus>();
   const [isLoadingValidation, setLoadingValidation] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
-  //const { isOpen, closeModal } = useModal();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isAuthenticated } = useAuth();
 
   const { id, alternatives, discipline, subject } = question;
 
@@ -48,9 +49,11 @@ export function QuestionWrapper({ question, children }: QuestionWrapperProps) {
   };
 
   const handleShowAnswer = () => {
-    onOpen();
+    if (!isAuthenticated) {
+      onOpen();
+      return;
+    }
     handleValidateAnswer();
-    //setShowAnswer(true);
   };
 
   const pickAlternative = (alternative: AlternativeEntity) => {
