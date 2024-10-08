@@ -3,6 +3,10 @@ import { Button, ModalBody, ModalFooter } from '@nextui-org/react';
 import { Textfield } from '../Textfield';
 
 export const Signup = ({ onClose }: { onClose: () => void }) => {
+  const handleCreateAccount = () => {
+    onClose();
+  };
+
   return (
     <>
       <ModalBody>
@@ -11,7 +15,7 @@ export const Signup = ({ onClose }: { onClose: () => void }) => {
         <Textfield name="email" placeholder="Senha" labelText="Senha" />
       </ModalBody>
       <ModalFooter className="flex justify-between">
-        <Button color="primary" onPress={() => {}}>
+        <Button color="primary" onPress={handleCreateAccount}>
           Criar conta
         </Button>
       </ModalFooter>
