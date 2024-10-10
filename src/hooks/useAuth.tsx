@@ -1,25 +1,45 @@
 import { UserEntity } from '@/entities/UserEntity';
+import { create } from 'zustand';
+
+type Store = {
+  currentUser: UserEntity | null;
+  saveUser: (user: UserEntity) => void;
+  removeUser: () => void;
+  isAuthenticated: boolean;
+};
+
+const useStore = create<Store>()((set) => ({
+  currentUser: localStorage.getItem('user')
+    ? (JSON.parse(localStorage.getItem('user')!) as UserEntity)
+    : null,
+  saveUser: (user: UserEntity) => {
+    localStorage.setItem('user', JSON.stringify(user));
+    set(() => {
+      return {
+        isAuthenticated: true,
+        currentUser: user,
+      };
+    });
+  },
+  removeUser: () => {
+    localStorage.removeItem('user');
+    set(() => {
+      return {
+        isAuthenticated: false,
+        currentUser: null,
+      };
+    });
+  },
+  isAuthenticated: !!localStorage.getItem('user'),
+}));
 
 export const useAuth = () => {
-  const isAuthenticated = localStorage.getItem('userLoggedIn') ? true : false;
-
-  const saveUser = (user: UserEntity) => {
-    localStorage.setItem('userLoggedIn', JSON.stringify(user));
-  };
-
-  const removeUser = () => {
-    localStorage.removeItem('userLoggedIn');
-  };
-
-  const currentUser =
-    localStorage.getItem('userLoggedIn') != null
-      ? (JSON.parse(localStorage.getItem('userLoggedIn')!) as UserEntity)
-      : null;
+  const { saveUser, removeUser, isAuthenticated, currentUser } = useStore();
 
   return {
-    isAuthenticated,
     saveUser,
     removeUser,
     currentUser,
+    isAuthenticated,
   };
 };

@@ -11,7 +11,7 @@ import { ModalAuth } from '../ModalAuth';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { currentUser, isAuthenticated } = useAuth();
+  const { currentUser, isAuthenticated, removeUser } = useAuth();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
 
@@ -134,7 +134,10 @@ const DropdownUser = () => {
                   </Link>
                 </li>
               </ul>
-              <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+              <button
+                className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+                onClick={() => removeUser()}
+              >
                 <svg
                   className="fill-current"
                   width="22"
